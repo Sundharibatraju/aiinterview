@@ -1,0 +1,833 @@
+{
+  "users": [
+    {
+      "id": "cabb77e3-68c3-4b69-bc3c-48449e7b7cf0",
+      "email": "sarah@cyberdyne.io",
+      "passwordHash": "$2b$10$2ftjw4GJ7/42F/dlG2dEaOhKvFMJwaYQU9F83lKJHTiEpF873S0XG",
+      "fullName": "Sarah Connor",
+      "role": "RECRUITER",
+      "isVerified": true,
+      "createdAt": "2026-09-26T15:34:05.023Z",
+      "updatedAt": "2026-09-26T15:34:05.023Z"
+    },
+    {
+      "id": "b33d8f5a-befe-4b4f-9d8a-92347b293cba",
+      "email": "alex@example.com",
+      "passwordHash": "$2b$10$k8tVDvZkSazNcPSESByfFeSD2qYvtQPXJgEHeDh5fdY/v7dKGgIrq",
+      "fullName": "Alex Mercer",
+      "role": "CANDIDATE",
+      "isVerified": true,
+      "createdAt": "2026-09-26T15:34:05.247Z",
+      "updatedAt": "2026-09-26T15:34:05.247Z"
+    },
+    {
+      "id": "30000000-0000-0000-0000-000000000001",
+      "email": "recruiter@technova.com",
+      "fullName": "Priya Sharma",
+      "passwordHash": "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+      "role": "RECRUITER",
+      "isVerified": true,
+      "createdAt": "2026-09-26T15:34:05.689Z",
+      "updatedAt": "2026-09-26T15:34:05.689Z"
+    },
+    {
+      "id": "30000000-0000-0000-0000-000000000002",
+      "email": "dhanush@example.com",
+      "fullName": "Dhanush Sundhar",
+      "passwordHash": "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+      "role": "CANDIDATE",
+      "isVerified": true,
+      "createdAt": "2026-09-26T15:34:05.908Z",
+      "updatedAt": "2026-09-26T15:34:05.908Z"
+    },
+    {
+      "id": "30000000-0000-0000-0000-000000000003",
+      "email": "ananya.rao@example.com",
+      "fullName": "Ananya Rao",
+      "passwordHash": "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+      "role": "CANDIDATE",
+      "isVerified": true,
+      "createdAt": "2026-09-26T15:34:06.348Z",
+      "updatedAt": "2026-09-26T15:34:06.348Z"
+    },
+    {
+      "id": "d7581a15-5678-46df-8ba1-14e9dd2450b7",
+      "email": "ffdhanush806@gmail.com",
+      "passwordHash": "$2b$10$CDMj3Ye4AzYp5o/kjQAouOlcKYNpscZ6oHrHn6ITmhOumZJLmBtpy",
+      "fullName": "Sundhari",
+      "role": "CANDIDATE",
+      "isVerified": true,
+      "createdAt": "2026-09-26T15:34:06.786Z",
+      "updatedAt": "2026-10-17T10:35:17.415Z",
+      "googleId": "112133314323278122174"
+    },
+    {
+      "id": "0ccf8201-067b-4311-bfe3-dcdf2240e939",
+      "email": "sundharibatraju@gmail.com",
+      "fullName": "sundharibatraju",
+      "role": "CANDIDATE",
+      "isVerified": false,
+      "googleId": "111185949762158331683",
+      "createdAt": "2026-09-26T15:34:07.224Z",
+      "updatedAt": "2026-10-17T13:28:58.867Z",
+      "passwordHash": "$2b$10$KA4kCWRB8TYmTibXjvYvCeeq9erA2oUjNjYnPaAsCuTUL0857Z.Au"
+    },
+    {
+      "id": "3f8cda29-fcb6-47a4-bf0e-faa60da0ac11",
+      "email": "23102042@rmd.ac.in",
+      "passwordHash": "$2b$10$jMnIWAey9.93qBVdeDy.Q.1AxqM3vyWgdCQYk4AHMgC.Uun5OY8iu",
+      "fullName": "Dhanush",
+      "role": "RECRUITER",
+      "isVerified": true,
+      "createdAt": "2026-09-26T15:34:07.663Z",
+      "updatedAt": "2026-10-17T11:25:13.412Z",
+      "googleId": "116951499340154463466"
+    },
+    {
+      "id": "710fcb54-09b2-471b-94fc-30bc444e02c9",
+      "email": "candidate.1789024325391@example.com",
+      "fullName": "Test Candidate Verified",
+      "passwordHash": "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+      "role": "CANDIDATE",
+      "isVerified": false,
+      "createdAt": "2026-09-26T15:34:07.882Z",
+      "updatedAt": "2026-09-26T15:34:07.882Z"
+    },
+    {
+      "id": "d9ef8689-a81c-472c-bea1-a0ee83841559",
+      "email": "google.user.1789024326093@gmail.com",
+      "fullName": "Google OAuth Candidate",
+      "passwordHash": "N/A",
+      "role": "CANDIDATE",
+      "isVerified": true,
+      "googleId": "goog_123456789",
+      "createdAt": "2026-09-26T15:34:08.320Z",
+      "updatedAt": "2026-09-26T15:34:08.320Z"
+    },
+    {
+      "id": "c53ce818-ee91-452f-8fcb-00728be017df",
+      "email": "dhanushtummala1111@gmail.com",
+      "fullName": "Candidate ONE",
+      "passwordHash": "$2b$10$NNrkFDwosjqz59/0Pkguk.pZ5vRn72ooGHLh9MZ492YiPCr5uAI4O",
+      "role": "CANDIDATE",
+      "isVerified": true,
+      "createdAt": "2026-09-26T15:34:08.759Z",
+      "updatedAt": "2026-09-26T15:34:08.759Z"
+    },
+    {
+      "id": "57d52e9f-5d92-4097-879a-0f7542eb5bb4",
+      "email": "bhanubatraju26@gmail.com",
+      "passwordHash": "$2b$10$UUkqCEsglSoAcVIUb8fUy.bqBp9idSTS2sEBkQxAmLvTSVpM4p8S2",
+      "fullName": "Bhanu Batraju",
+      "role": "RECRUITER",
+      "isVerified": true,
+      "googleId": "105019791431002283756",
+      "createdAt": "2026-09-26T15:34:09.198Z",
+      "updatedAt": "2026-09-26T15:34:09.198Z"
+    },
+    {
+      "id": "636626e1-e54e-48e3-9329-3b8d555a929f",
+      "email": "ammubatraju@gmail.com",
+      "passwordHash": "$2b$10$xuFH7aHqGPKn8ZQ0NUPfy.9kklk7SbcavI.5.Pnhp9pQ6eaNN0mpC",
+      "fullName": "Ammu",
+      "role": "RECRUITER",
+      "isVerified": true,
+      "googleId": "100964678770929669374",
+      "createdAt": "2026-09-26T15:34:09.417Z",
+      "updatedAt": "2026-09-26T15:34:09.417Z"
+    },
+    {
+      "id": "437c39e0-0452-4282-bc69-cd664d6e389f",
+      "email": "nonexistent_test_12345@gmail.com",
+      "fullName": "Test Candidate",
+      "passwordHash": "$2b$10$pSlCIt1kw.OxTNndH7.3HO5iTxa.YuphzlWJA584kjsTCaIiQrOGq",
+      "role": "CANDIDATE",
+      "isVerified": false,
+      "createdAt": "2026-09-26T15:34:09.637Z",
+      "updatedAt": "2026-09-26T15:34:09.637Z"
+    },
+    {
+      "id": "7d4148fe-5a0a-4789-acbc-65a14295f737",
+      "email": "dhanushprojects123@gmail.com",
+      "fullName": "Dhanush Reddy",
+      "passwordHash": "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+      "role": "CANDIDATE",
+      "isVerified": true,
+      "createdAt": "2026-09-26T15:34:10.075Z",
+      "updatedAt": "2026-09-26T15:34:10.075Z"
+    },
+    {
+      "id": "8be6bce4-4132-4101-9821-ff9531ccfdf9",
+      "email": "test_lead_1790256138812@technova.com",
+      "passwordHash": "$2b$10$iT0iZ3YVsdZnhae9YVxpx.8kW9ZRK/fNgRp7BtfqdMG.rdP2KWnem",
+      "fullName": "Test Lead Recruiter",
+      "role": "RECRUITER",
+      "isVerified": true,
+      "createdAt": "2026-09-26T15:34:10.513Z",
+      "updatedAt": "2026-09-26T15:34:10.513Z"
+    },
+    {
+      "id": "2dfa5309-bac0-44c6-8b4e-c4ee7c8ade2e",
+      "email": "test_lead_1790256148697@technova.com",
+      "passwordHash": "$2b$10$vruIXo3Gq0mP8i5t1/DR1eXtLuzm3Q9.AvT1x1bDM9epG1J9l3YOu",
+      "fullName": "Test Lead Recruiter",
+      "role": "RECRUITER",
+      "isVerified": true,
+      "createdAt": "2026-09-26T15:34:10.733Z",
+      "updatedAt": "2026-09-26T15:34:10.733Z"
+    },
+    {
+      "id": "eb7edea4-d873-4f0c-a3b7-c27d19110e2a",
+      "email": "tummaladhanush38@gmail.com",
+      "fullName": "dhanush tummala",
+      "passwordHash": "$2b$10$n4bRLLzF6dvyzxlP0NYH0OKUo17quoh06zhreWiUcqRdsiHP8qqyS",
+      "role": "CANDIDATE",
+      "isVerified": true,
+      "googleId": "101246523088812227002",
+      "createdAt": "2026-09-26T15:34:10.957Z",
+      "updatedAt": "2026-10-05T11:42:07.038Z"
+    }
+  ],
+  "candidateProfiles": [
+    {
+      "id": "prof_001524val",
+      "userId": "usr_f20ed07bg",
+      "skills": [
+        "Software Engineering",
+        "Problem Solving"
+      ]
+    },
+    {
+      "id": "d7581a15-5678-46df-8ba1-14e9dd2450b7",
+      "userId": "d7581a15-5678-46df-8ba1-14e9dd2450b7",
+      "skills": [
+        "Java",
+        "Spring Boot",
+        "TypeScript",
+        "React",
+        "Docker",
+        "PostgreSQL",
+        "Python",
+        "SQL",
+        "Data Structures",
+        "Algorithms",
+        "Object-Oriented Programming",
+        "Software Development",
+        "Data Analysis",
+        "Problem Solving"
+      ],
+      "resumeFileName": "Dhanush_Tummala_CV (2).pdf",
+      "education": "Bachelor of Technology in Computer Science and Engineering - National Institute of Technology",
+      "experienceYears": 2,
+      "projects": [
+        "Software development and data-driven technical projects",
+        "Academic and technical coursework applications"
+      ],
+      "bio": "Dhanush Tummala is a motivated Computer Science graduate with a strong foundation in software development and data analysis. He is eager to leverage his technical skills to contribute to innovative engineering solutions.",
+      "extractedProfile": {
+        "bio": "Dhanush Tummala is a motivated Computer Science graduate with a strong foundation in software development and data analysis. He is eager to leverage his technical skills to contribute to innovative engineering solutions.",
+        "skills": [
+          "Java",
+          "Python",
+          "SQL",
+          "Data Analysis",
+          "Software Development",
+          "Problem Solving"
+        ],
+        "summary": "Dhanush possesses a solid academic background in computer science with hands-on experience in programming and data-centric projects. He demonstrates strong analytical capabilities and a commitment to continuous learning in evolving technical environments.",
+        "projects": [
+          "Software development and data-driven technical projects",
+          "Academic and technical coursework applications"
+        ],
+        "education": "Bachelor of Technology in Computer Science and Engineering",
+        "experienceYears": 2
+      },
+      "phone": "7993790362",
+      "location": "India",
+      "educationDetails": {
+        "degreeCgpa": "8.75 CGPA",
+        "degreeName": "Bachelor of Technology in Computer Science and Engineering",
+        "degreeYear": "2025",
+        "class10Year": "2019",
+        "class12Year": "2021",
+        "class10Board": "CBSE",
+        "class10School": "Delhi Public School / CBSE",
+        "class12Stream": "Science (MPC / PCM)",
+        "degreeCollege": "National Institute of Technology",
+        "secondaryType": "12th",
+        "class12College": "Narayana Junior College",
+        "class10Percentage": "91.2%",
+        "class12Percentage": "89.4%",
+        "degreeSpecialization": "Computer Science & Engineering"
+      },
+      "headline": "",
+      "summary": "",
+      "primarySkill": "Software Engineering",
+      "resumeUploaded": true,
+      "createdAt": "2026-09-26T15:34:07.005Z",
+      "updatedAt": "2026-10-16T08:07:25.411Z",
+      "resumeText": "%PDF-1.7 %äüöß 2 0 obj <</Length 3 0 R/Filter/FlateDecode>> stream x��Zێ�� }�� �� ����� � $� l�@� �<L��cǻ�n ���T o\"��v�� �(���Uu�ԥ� T�������O?< ��8 �<|,\\� ��\" ꒊ���O {��� F�����wϟ� ���i�j ��xn�� 1�T%. >���*x�%>��ӏ � �����ׇ�xzW��PAe���ёc�]p�%\\���U�?�N�?>���==���� �_�RL�P�� 帒ӕΘ��� +U��q-��u�׉ �����[�R:�X`⃋�* 5 };�����vP�ۀ����� ;�]��� O�\"�����j:���HG�x���׳��� � ��m�o��� ��6 U���o��ǂXE��� ����?���=t����PF� كе�|�� ;N:���\\�8��� ��}��؅t��t���U�� p ţ3����0;u0(] _�Y����5�\\�0�r��8a� <�5� �A�� HS�S �����*� 6} �&� �Dl��a�6�Wx �� ?QK�+�s��� �(� v �Љ�%�� 5���( �6� �^� ̤ 7���I�b����� ?PQ����W0��/�YzK^��Q& �|dZz̿?��ݟ�?=����_ ��RXE�yUW��9�`�#��� \"�mD .aJ\\aD ���A�~��� � Bm�� \\әO|&�� ���� �;�] W�G� E{�: � 6� ��P[ N =�; p &�0q� �()y��F7찑 � ���&�0�b��a�V���Q��Q�3 T*�� E� J蠮VvH�ҁ튱+Ӝ ��coQ5 ��`�F#�B�AG'�� 11 �U�ej��w�<�ŉ� ���wbC +_D�{� _�=�*����S���r�ds���- ��i' ��~ �S\\� '��e�B1��V��� )�D�%P�ט�{QP Z��(�I� &��R�m�\"ɚW ���;�� 9q%�r��$]�\"�\\.sd�b���> ��˝� �� �T4w�A]�����9e��~:��v\\�|c�=��#���'��\\�.��x�,y� z � ���� WwA��уB��5_}2 $��ؑ�����e )k�� O� �j��=2�L�X� ��' k�: , �������q;�g)��s�P-��A: ��.{���e� g>� �$ $9 �x0-5��h� j�ҫN\\���!��F� Sp(�Ya� ��!��V��ڣ\\��� �E�wt�;�OR潐�T�^+ O)����4 lvv��Hh � �0������ L�8 :��\" �ş� �w�w H�����q�Q5k � �Ҭ�� �9�b^��'��^j��Y� Z*�a������K $ �Y_qh *i��M� R6 mHFe��\"�� ��h9`���6�k�XlH��= �aQK�N��D+�e�0��D�4��tw&i>K��@��N���ѬW�� F��ATQ�^DQ �> �J_y�) �H4hU'meRI�W)� G~;�G��r ��� 1�E �Y} �E� * �I��0����� �E 4� �����f� ��4 ��\" ��I1� U�q�[ Uh?p� hؔ�(NW �Ԗ<���.�rT � z/~����hE��(U[�$5��)J��NX��� ��O%����J}& � �E�� �N:�y4 �����U���� �.G�W'v�}�� K�m��R 9� l�O6L���T��z���0X̫z �tZ|�T�� ^ H]F'��]_��$+�[���J�� �օε쓻تK ��'1أ� V**���& l~\"e�x���j� ���a��{�' Mo1�kd�^�w�\\�a�� �|0ei� �,�Z 4/����&�fé�#���#lG�ż�0��A� v$�W,�+0�u�Y f�[ � w�i��۾+p 3/�!���Xz،ѧ����q�] �� }���U Mָ�NL��cF?�u xC��`iZG-�,6f �0I�a�1e�@j K�w�;d#�1��W�P� �Qg�z�%b�eg�l \"f��V���ꐍ}�\\ �//u�lTSX,�\\�1�OY��J+���48$��<@GsD �:ca�O�F�\\� cŤ�?� qԢ���tx �YU�� 2t ��7B�Y�?c�3�;�;d��)��u b (� �� � d�pPr�۾� �B��ٳ0 4Ö�N�:3u���� � +iܽ Vۡl1� �pJ�S `�K���n(! ��F[�m m�`�� � ¾�Č��$=����K�L,�� �ͼ1�.P�U�N����); py?���[�!��d�׺d^���j�0�1��XX*�~��x�/:�� �\\�O� �������ۭ:v1w؆���x ^r�& ;�tVm$�Kjܑ����E �=�7\"�?�q� ?u�ġ��Ж b\"�� �<e�ym̆7�Zl��^ �AF1��w��� � qb9+aM ��E rhJ Ջ6#�� U�OS�<8i~�;%� z$M ֲ �����$ �6�o�ѷ�}T��� C�/h� E�u�\\�rV� tHm�Tw�����8 ѧ f�� � u�ܨ�JO�b� @��� o3^��� 0�b�ms�լ:��mi� N �������=. k]�¯P�G i��(�\\�b �,���x ɯz ���� (���;�H7����B1ݠ#�. ��B ζ �B/� �M��<P2�|� ��i r��9���� S�Tj� �Ѵg���a ��*�z'�% AԎ��Up� ���� `���kE�����!�,�� r�� �5�8ټ �Z�(�B��W_ў �Yz�`s}@������ ���Y�F�,i�� �y ) �� �-��ڹP�-[-g �� _{ E�\\5K�+Z����F�pM2_� �K�ư��Yf��@d�� �� �K+ ��|�\"e� B{\".� �V��� ��g���; �� �4� �����h��3$��:�x؁W��1�Vp��댺�� \"�*�غ ��1 =���X� D�z>�������� ������� ]P��<�QG0�Gj� n�_�R|gm���X��:�.o �>u�]� �L�f���� F�����w� � � �� - endstream endobj 3 0 obj 2914 endobj 13 0 obj <</Type/XObject/Subtype/Image/Width 37 /Height 37 /BitsPerComponent 8 /ColorSpace/DeviceRGB/Filter/DCTDecode/Length 1286 /SMask 85 0 R >> stream ���� JFIF � � �� C �� C �� % % \" �� �� � } !1A Qa \"q 2��� #B�� R��$3br� %&'()*456789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz��������������������������������������������������������������������������� �� � w !1 AQ aq \"2� B���� #3R� br� $4�%� &'()*56789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz�������������������������������������������������������������������������� ? �� ��c�B�� +��a�[� �W�� �C�7 ��kH� �2Hp�� \"��� /�3�T�ς���5�Էi�� }d���P3~ �������� ���ǀ� �7��f��y4ֻ� +�}� ��F��ĖS� @ ��� ��@xsJ}Bo Kw .�O���l{F�X�` ��u 6�G����������s[�Fc�6 U�� �5�S{� ���/V��r�zP����<�ջy�!RGЊ��U|+���?c� ���Ӵ� �i�{�� d� ���X�ѷ$�� �I +)� �k�2����L�� ��V�� ����~!�����)��#��Y�g��� ��>�� �E{ � _�'��>6/�t�9�� ]�Ce5�3%��;��n|���3��=�����F�H�-o������U� �m� � YOb ���� 퉧|O𞽩�� ��� �+� Kmf ����� �q?�*�S�{� aa���' �t�*�Y���O������H-�i$bx ( ��}�W��G�w� �fx���� >��\\�crp���rC ���� �־ � �{�U�� � �B��>,֣�� ӯ#���3+ Up��K � s��� o_��� 7��w�����%��ig�]�jR��f_�NHS�8$ QE WL�k�8�e ǃ�QV��� (��1��fk ��%_����4QE �� endstream endobj 85 0 obj <</Type/XObject/Subtype/Image/Width 37/Height 37/BitsPerComponent 8/Length 86 0 R /Filter/FlateDecode/ColorSpace/DeviceGray /Decode [ 1 0 ] >> stream x�픱 � ���Q 4� f62�Y� Ҥ ܥ���ˍ ��Ȍ � �F;T:6VH�*�$y��n�t���?4�f�� �w N! �TEӧ�.]�� �2� �Ҁ V� Q endstream endobj 86 0 obj 102 endobj 10 0 obj <</Type/XObject/Subtype/Image/Width 37 /Height 37 /BitsPerComponent 8 /ColorSpace/DeviceRGB/Filter/DCTDecode/Length 1479 /SMask 87 0 R >> stream ���� JFIF � � �� C �� C �� % % \" �� �� � } !1A Qa \"q 2��� #B�� R��$3br� %&'()*456789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz��������������������������������������������������������������������������� �� � w !1 AQ aq \"2� B���� #3R� br� $4�%� &'()*56789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz�������������������������������������������������������������������������� ? �= F��,�t�6�Co � @�� �$��I9�^�� �7�~ h�~��m ]6����R��X��p��lg����[+�t��.�m��\"� z09 � ���s�/�Z�Ý ��� �<=��ҟ>��9���F�d,�Pm�q�ߵ Fbk���0�(�J��쒷*��O�~ ��N� ���9F�Y]]��� Ꮢ(�U����%�^ ��M����F�XZ�H.ay$ ��b0��,3� $� ]N�� �X��=&�&�it\"��%����p� ��� e$�V��00|�� �� ߱�r�d��JV��{w>a�/�4 � ����SB� @� m�pJ�������SEt,�X� #� j*���*�u*ь������ O �� ud����į�o�(���_ �T 臯Ϛ�������1��� ��麵�ͅ蹑� �Te�06H�9a�W���V�0ui���k�c��� �`qt�+JJ6]���P����� �|G��ǩ��q�#(o-��8���Hߑ����/�?�~%\\x�L�F�>��i � �`�o. s�� ;v� �O�M�w�R��a ��&� �����8��觎F9 n� q���J�d � @� ����^�ԯ�Ԡ�(����R��������5��&�,� �F�e6㢽��g��D�Zq��\\j��0JZ�^� ���Vqi� <oi ��\\��4 V�� ����E� ��� ��^��X�uMR�� � :����` �pM �> J4`����| g VN;]�g�� �����:~�<)o4���2J�W*H�@J� �8��] W6]Ru�Tj�w�� �ZM��Ɩ.�8+%)%� (�� ��_ �? 떚v�ik&�q<�\\�l�@ H�6�rs�� �Q_��9�aC0�J�f����s)�p5�4�T��kV �� endstream endobj 87 0 obj <</Type/XObject/Subtype/Image/Width 37/Height 37/BitsPerComponent 8/Length 88 0 R /Filter/FlateDecode/ColorSpace/DeviceGray /Decode [ 1 0 ] >> stream x�픱 � ���Q 4� f62�Y� Ҥ ܥ���ˍ ��Ȍ � �F;T:6VH�*�$y��n�t���?4�f�� �w N! �TEӧ�.]�� �2� �Ҁ V� Q endstream endobj 88 0 obj 102 endobj 90 0 obj <</Length 91 0 R/Filter/FlateDecode/Length1 14916>> stream x��{y|[W��o�dْ�vK���g-��}wlE��8�b�Nj9� ۉ�8��,-����J)Ki� (���1�!�0�!S��� Z`�� ����i�� -0��V�s�$/YJg~��gG���{���\\�G � ��V ���� c�S[ !�%��Ǝ ��3�G ��0ִ��ν�� �0�)8�s�Ď��/�HH�C� >991: ���(!�!�o�� ����@ ��{� ��~�;�? � ��?6Z�}p���)� �;z�� �� �{ ~H�F�N� �e$��#�{����G^$�_&��I�?ph�@rٱ �� �o� �o�* P�>�r���� �E c�h2[�6����r��y$�O.� ��H4VU]S[W��D��� ��� �� � �uB2 5g�~�w\\~ ��\\~'�4� U�� 1�F�qIy�O� � ׵i�+{]�C���7�U i��4!ԔNK��kt\\ aW�%)U T!� }C� izzTR ��F`D¹ � j q���i�B\"鴬����t:�0Q ����@ �� Rx9� r���� : Sب �H�3����3��� { LI��4l7S�����F�\\���Cr � C0�B�sG� .�hR�s�!��dL�+'eI!rrTa��P� �p�\"D%��� �*G�K��� I#�H�J�&�A\"��H]��(rQ�4q!c � ���WX�<ڙ]����|�BG;c�. C���R� 9�V �� z Ћ) QI)V)���18KѧF�� � �!�製�C3 ڙ.W�&��1�0��?�;� tyaܬ� EgHaj��Laa (H* ��BR �O���G �P� ����f(p ē� ^ñ��W�eyؕ��%�_ I�MV �+`t)��� B�2�%���s�RU8 ��� \"J���F�� EE��I29=2S�G�� � 8c DC$� Gg(�bt��� �a�5Gg8l-�rl�� [[tF��=:��� ��a[ U�� y� �.�5.8 [7��m)��m ��� ��V���������lle8 ��Ԧ�? � �H)`�HJ�,(fy� S Q� Q���A�� �u�*�6��� � ��)�yNS� +�Z�^�b1#�N��R�Jg$J � ��Y\\�P '���l��f�� 7�½��k� �9� SbѸ�-��� *�� �W�(��/ť h�� �� � 0ҡ�.�,�G�Z-p~U � � *�\"tE&��$�M�^� �R<��¡��H� �l� �+��J��0 ֙N�Wтw�Ul� (u�5�����K&52.+ljt ��Ԩ � t W� ��I�� ; N�{A�� �]� YuQ03���A���v� �F~� � �%{� g��k� ��� �6`M�:�h�N$�[^�����T�� r %�Cq� � R� ���y���דU��19+�k�mN,2�n}��T^.# Ю�_^� QY�#˺�����3 j �k� �[<ܴ ��8�Q�*r�M[�Jud FM j�� �ĕ ��ΫW���Y2�y ,$�][ �L򿡇+��T �G��&��X$lo:G�2dF���x ��c@� �W�+[��y�� ��J 1q���ࣨŬ� NF�JhRȵ.�� �(ϧ�(ꢒ �+z��6 � � ������J ԑ �Y �*�A� q X�8 �A�f �\" � �>�A� qZ X�8 ���� �i `#� p � 0�8 � � �a�A` � � q � Uj�ټ ;J @�T� � U��� �ѨR;�� ;*�� !�� !�DT��G݁ u� !� !ꮨR?�� ;*� B�) BԽш��P��� ?b��9 � {�?Fd�HZI �� ��&{ g�P��� d�t�P��� X°�� y-�o\":��O ��\"Z���h4E�NW���e � A��j�¢t���] -�� v� sCCmM c� 8�F ڹ����30�/h�kgr�Ѝ3�+z ��˦ F��� 9+�\">��e�` VGJ+¾��i,/^i�ה�k�Vh�e�f����l�rv��ynC��߹��~us��n�[^ ���^O��XX6�*��� �jn��t � Ha� _� �������0 �)L �% p�\"�� y�9s�\"�@'���� Y kk� ��Ͼ�p�M�x��g7g�X7z��k� �7Z�|� T��Uە?<���c � ۏ=�u�A8��p��H�R�&% M�e S UO �X�F�p^���t��s���3�2N�t�}���{�i�[`�� ر��Hy�k� K����ɒ�e��[��� A�� �,S/���@P 4�O^�� � ��6�}��A 3_���.t :�� �gfm~�j�[�)�@u�� N8 g ζ O�],0� h!d�,e�\"�S�y �p( ��i�^� �xj���Cʉ ��g ޼�Sa�;\"�5�W�����&[قK߷:�t{��o� ����w�� ,!�^� jnb) �� 2 @+ J|堃 %5Pb1 5 )�%�1� �� ks���e �D��� �<��m�}�5T �������U�c���/?�~�#/ Gx���8P ��.;�w� 6' Z)��(�1I ����$,GY0#� <oI �� Z J*�@� $ $ l) � l��QmMC}]\\�W-�fg� \\ s�um�����S;��[ }~wۍ�����<&Gm�p��xu��=;������8�.��\"��� �ֈ/X�wd`���Βx\"t����7 �&\"�����6���Z�* 73� y x�AME b�9UO�2E� �CC4���)B���ֳod �\\�<�W������ �.g �. L��� U �� �N��PS� �� 1��b�744�v� TE� �� �U U��n_��-�OiE�S��,���i�/�d�8�o�%VQK g ;:唇y�(j�K�g;\\ �9gK �+�r�,X �-6�U -Sp� P� G� ҁK� �go �Ț\"~/^� ���E��'hq��u' ґP w �G_����TGR�\"�tD�f-���R�Ş�{��d�e��W� s� �~�� ��. �����r�fؓ�Q,G8�L ����w� T��U�e��� ��.�M4jx �1� �n��W^�4yu3� F�jg@��Ǭ�]+ ���?�D� g_;}׫]C:�� lޘ�9���.}��\"�\\SR`��� �'.���G�;?�m�)�I Hˎ>;���G����.� �u � ��&����,J � v ��Ь� ��r �������RAc�٩�) �����6�B���/3_�˪lt� D#�̟� ��3�Q � ї� s�ZoӇ��G\\6���6����8 G F���Dd���~��*+� �Zġ��D�:b�eAb �ٓs��>������Ql�y)�� T��.s� d\"΄]��b��7�^2*� �Q f���f��2��/��d,+һ���ƽ?�8��I���U��ՏV� �|����H��w� � 3 .�W��xe%��Ph>^��< � �o�����_ܲ��B��C��!�] ņΨ1��v�x>�ޅ�;��� �:�=�{ϳG�ۏ>�4 �[ �� �N ay�9�� � �j�!�n ��V� 1B�l0U�]Puq fz ���۞?ٲ���7?��� ��=E_���U���o���#˿{˾�'�\\�&�W� �&Qi /�QO -��My���}����N�vļ�ƴ���� ! \") TZ> ���;/�h*� _^ 5ӊ�v��5�}� [�J��t ���|U� 6,?:�k7 � w==����m�zt j� � :] !mE � # \"+|A/��zQ7rjA� �!,g���G��i/�]�?� ��� ���.�� F`~�w���|����8S[J�$�sw���D�o���ԋn��~��(�� S¸H.b1#�� } � U�u�� �@�_nӰh�L6�c �� ���K��y^����lrAe�krL���Q[� K ��� �[ �Vc����Rz5s���{� ���A��9ڶ.�����e�k��v ��,Ac` �a�=,�� ��q� �%� �0��� ��lr �H �2���RV���`�d@ ̷�Ur ��V 2� ��� �p���D���Pe��f �z ЀΨf8�:{�XԢZp� 6o�v��� 2��g %�\"�8�e!� nl�_Vew�z*����y�to�rdt_1}�^��}g��g�J�6��ݝ^��e�Z��/��[wL|�ε m�� o�̨� 4<L�ܫ���F�r����9+ex6�Z2��H:˧RP CJCs&kǈ� ,�ͧ��} � �.�� jJ +��� f�� �� ��h�!YԚ\"�� Η �� C ��6[� ��M�� � � �k������Z��/sв��H`��f}��Y��?1�����[� 8���ט��� ���47dVU ��� � \\�#� I؋��DD_� ߍ�M�1g /F|�L��nf���c���k �� Jďk�K^b_w�3��-�MU�}� m�f�q d�b6�� � ��\"[ �G � �ĥ1@ �������f�!k�b��n�Su �*� �k�8(���j��Ub�X=��fj )fN �Yo�٦� �= kw�����p[w�m � ޷������wV����7^�s��;/�x�kw��}�3O<� � ��2 �B� ��}<a (GT�r����+� 2���8� VU1D ��y=$�<��Wƫ�n1�UzU zA��\"�� ��< AѼT�N=���ֲ�tݺ�#�m�>=� �� �#�tmu ��Yՙ���6� ަ���'�_<��:�9�� �Z � �Nm <�� �� ٮ � %� �A`8 ��� ?$��MP��zRcJ��Y՗� N���zG� ��d �5�����g �: �K�^���0SV�; ([�x+�Lt5'{c�N�9Vl�V5xG:�y���ҕ�[]; `_�ٻ�U�eb��;j� �/=w s�+�X*���@<< �{� ��s����% 0ƖP��s�2�ژ �1jLC U ʲ9��g҉B�q �l z! �]\"� �oR�/K� ��i0�Y��e\"� ��U˖��3�� [kbsu@���;�3|!� :JY ��L^ Ք� β�@ � �� �wH�@ � Fr�Hn@*'0J ~�Jd� Ѐ=���AK�₵��v�I,6 �@9�5Fx ʠ����w� ��ʢŖ *6L��3�M [ܟ��U��� ���d�� �5uw ��)s9'J�P�y����պB���T$��i ��`� ҟ��b�C�dr�FfLI�eI�d8/J6�h����( ��-�/ %��l����h�}� =|Q����a3 !��!7F| �u�<�a��\"�n 6��} �� �5;ɜ ?iOX�`J�`)֏ v����! � �(s�+$ �� N �Or8a�@� ����=r色��e �Þ�� �Q�2:��� f� NGu�� � ��mVS�V ��AX�� �VX ��y�Q �I7[c���O�Xwz z�m} c�L��Z ��� �WU�ݞN t������ >&��ƞ7�+\\��*t3� �� +, -.� �V:���9HuB�jtE�~' ���]�G��h.應N 9�F# ����z�e�� -��� * 3��Y6 � + L�X�!��ĊL~�J�t�O}�� A�����ìM4}�e��ٵ�� L� ������� ��D�_�� ��X Z%� � �y���Ԙ遤�ޜ�� �K&�ɨU���[��|6�]*�U��AoK�@�,%E�� +=� V�6 Xl�hĳ?c �̽� ҞZ�� �� Ғ��˨ M t� t�^�� RO�K $��bP;�� y� � 0 ��c ��h6���oQ��� X�6o ��jU�� ጄ)����#��>|u0� ���V �b!�m� ��\\� &��Xo`! a�� �-�ݻ�.�{M���ן��m�i�*s����?q��HM��s�z쎵ޔUJzk|��9�lܗn��G�� ���׷�y� � <[]�$W �+k����2�y� �.i!k�0�D�XG5�Z3�h�`b,��c� � ����%��򛈚 j�d@�� A� J�+V� j �N^��+� w�:J6 � � ��Y�Q�+q�F�%-�E�i���Z �ƖOV�� ��54��!7� ��s�x�%=�(�����QKI�ZS�Ľ� q��np���`]����7��d�� 1Jqi�@�� �^V׽nC���Z��ھ����5==kV����: �lN���iՍ�1(��R��-p4 �H޼�5�r[mj����`�� � woZu�@��7\\>���xk��$\\&��q�������� ���φ�ہ� �Cj ���4� �B. g r52 ��(�q� �t� A��5�����kCc�9�E�k��� � � �� �cR��>w�ƭ�Q滳 �}e몦�� �F�� �9�x��]��e��Y�Y~��]���]ׇ@C��7 � X�X������� �h V� ے��u��: 5� n�ں��ժ/s؂�DUy�ǘ ?<��o�{�zs �ɖ�Ef��1��8�*�6��<9Tc�F�#��Q�0yB�huy 9�n�? q���������7�LB� `��T ��� �Ӥ�W _� �^�� � 38 ldӢ��P(���\"$� Ѳ_�s<�F:!v� p� � 5�I͂�KC� 4^� ��&Ij�p8���^OS�� 5y���� jʽ����� ��ˆߦ]x�0�_6B�Hۢ��+�6 �l��Q �gdY�;� Do��K ʝ \\ �!�Ek*:���_�|� ��)KA�� ��o@�h� � �� bt��tZ2����Jz���D�в�����F�N@�_�ܦ�T%b�%/��� R���=��L)) �C~/�Z�h *�����K��sW�QR��1X���D���1R�� �s���Z�Jg_5�i�b�<b� �A{� ����2�E͸�g���6z�� b ehr�\\��L����5c �� ̤ h���`H�x> �5` P�W��<f��ŕ��4��n�6 Dp[G;%�= =�H�\\*3 �et�6[ CB ��|:f� H��6�4�˹W�4�^����'���Ze]�;�� 'c�Bw�Ko��4���$]�Ek/ +]�G߾w�s����ݓ��l��)�� [3��� ,������C˼��^ �̮�2����Q�|d��+ �;~�=��=�;�4���G��KWޛ�9�����j�~������ �8 �x $�#�a�ĸʘJ� ���cP���� ؍Y�� �L�+� � <�Fa�� ��� � $%�1�Q�ɥ�h Y{��ř~� m�J͑��H��m�:y����� l[ro%��p +j8 �ҢV��c��ţ��m�� ʖ �w�����L� F�����%�� ��e���[��*ᾡ Z� ȅ-(sZ L��ߞ�rf_�] 8=����:G�Z�N�/X�����@�mg� D/�]9��Xlc��q; ��PK�L �/�/�ڥ/z��*,ML�����=�J�����c%�\\ �X>��h셩 ��� ql��V�j4dPW�,.h�\"�BY .�Z��Z��5��� �0�\"�=�� �1��(i����FB � i� � S��m�����]�UE��{i ����l��>�u0� �ї.�d��bԙ k��ZyǙ� 8`Ζ��w--���t.����%%3%���tB& �L !ܑ+��� ��xq�_�����Ѓ�M( �f �lW�&�����6�Y�h ׭�)ٽ��%䵗 � o � |�`��� �M��`� ��E� ��� �^7>! �]�������]�ӅV�f.�/��� h��g�<���3��A�T�fz�#� ��� 3� ����>�/�jM�Ok ��d~�tч�Gܦ����r7�� X���LP���' fB ր�!����L�@�Tc KD.�j # ���� ��4�𷇚~Ȼ5�g 2�e ͓S�ʅ���#K�aĪ!�N� �������DÇ\\�� {0 �� 3���� �@� զh�{�7#w � ��w �C\\ċ2�N٭��� c_��~ e�����\"'*��w��a�� �f�Φ� ��4��L�k�dF��i�=���X�<d)�8�8�����B9�r�rՠ�T ��?�5��Z � Ym���6��&��� j �\\x��W� ~V����f �5�y��I?�>�� &�� �� WE� ��\\ 3�0Q ���h)- �q�^ ��3�����8q��@1��P�e�� �ir� �n�V��i� J�� ��P�� �zU�=�[*�y�Ag��� � ��L�ab� ���R�ݿ �2��l.O�O �w��mƶ? �VM�y�л��g>�i ~R\"@6��� H����l�`\\�' ͜��x=9 �q��)��.r�o& �o� ���'1 r��N�ؿ\"{�6 �F� �&9�� ��.R�%�a�6�OBH���5 ��4���%7�/ =� ��[Cڡ J��܊��7��� ��Β�A��� �{��~�TB [Mj�zr �u(Xer��O�a����?G:`�aܓ� ��^r3�J > �Ӥ�} �¿&&��:n?&7�]?C� r�$=I��T�� �4�\"� ���$�m�=.�������1�4��Y� �MM��em��n�K�GwZ��3�G � �uQcю��E� �kXf�3z���1�Y�o�ϋ q��[�}� fμ:�� ��ǯ �5�G��{1�e�Q«�F�<�PN ��j��0�S��� ђ�9�����s0 ���r0O��J�� qPw ֐ �. kI }, �H }9 �I�V ֓&�/ |O .�>� l \" ARd?9@N�Cd �I&� \"� RE@r �� �)2 S�s �%��!hw�ܘ�b99 �$� \"�� Rw: ; �U��Nu�$�m��� �^ut?|'� �� �a [r^� �'�3EƁ�8|�H H� ܡ�� h)nl ��;��7��H�.�|iѮ v�]�G�s �G c n�8{`l?�L�ч�G�q Y �� ���$�:��.X7��c@� u� �^������U.욧��*�QX��Gh/�N�� U�����S) U����=+� ��8�[�m���N�� w jh�.�9����@� � �� �R�M�n�� U9�7�T�PW��}$�N���%;�^�C F��=��\\�� � ��.U��U ��⬕d%� vկ�G�/�U6u vE� P�&�R1 -Z�N�_ ;� kW�. ��H����U���C3�>��[-8�1I�r��� {�$)�� ��>� ;�]a��sz*�� �� ?�縐�k}�B�&<#�ΙrzO����ghF`;g ��*G�K��)|�^�S���ղ�� =� o endstream endobj 91 0 obj 8845 endobj 92 0 obj <</Type/FontDescriptor/FontName/BAAAAA+Carlito-Bold /Flags 4 /FontBBox[-501 -272 1164 1020]/ItalicAngle 0 /Ascent 952 /Descent -268 /CapHeight 1019 /StemV 80 /FontFile2 90 0 R >> endobj 93 0 obj <</Length 457/Filter/FlateDecode>> stream x�]��n�0 ��y /;�*�C�VB�( ���h�<@H �T�Ȅ o?>� F� �s| α���n��Ü� c�w�: � �2^C���� �i�����J��s;ey���.�;��q\\.��wܻ�ᦞV�xp߲�g�] �I=�Y��z ��/wv~VE�4�w�X�{;�h�.���] ���� S� |�&���5�tc�.S۹���˖EѨ�v�d����U)�p�>� Cu -�Ţ�l�/���� �;� �*�%��Z� � ~����݀W�5��l�k��ِ���d�eM��߷`��WS e��_��N�_�I �~������R -���B��~+}�����o�QS��Yi�q ��k�7�o ���-b �[�r =X܁� ݆ j�6�PK-z(W��A� ��� o� ,��$ 8/��@��=�5чE���P#�ԏ8�Wҋ�9��� ��P���x����^u� ���#�Yǔ �=��4NȒ�_/w�� endstream endobj 94 0 obj <</Type/Font/Subtype/TrueType/BaseFont/BAAAAA+Carlito-Bold /FirstChar 0 /LastChar 51 /Widths[0 630 630 605 658 652 472 226"
+    },
+    {
+      "id": "0ccf8201-067b-4311-bfe3-dcdf2240e939",
+      "userId": "0ccf8201-067b-4311-bfe3-dcdf2240e939",
+      "skills": [
+        "Java",
+        "Spring Boot",
+        "SQL",
+        "Python",
+        "Data Analysis",
+        "Machine Learning",
+        "Software Development",
+        "Problem Solving"
+      ],
+      "resumeFileName": "BatrajuBalaThripuraSundhari_resume.pdf",
+      "education": "Bachelor of Technology in Computer Science and Engineering",
+      "experienceYears": 0,
+      "projects": [
+        "Project related to data analysis or software development",
+        "Academic technical projects"
+      ],
+      "bio": "A motivated Computer Science graduate with a strong foundation in software development and data analysis. Passionate about leveraging technical skills to solve complex problems and contribute to innovative projects.",
+      "extractedProfile": {
+        "bio": "A motivated Computer Science graduate with a strong foundation in software development and data analysis. Passionate about leveraging technical skills to solve complex problems and contribute to innovative projects.",
+        "skills": [
+          "Java",
+          "Python",
+          "SQL",
+          "Data Analysis",
+          "Machine Learning",
+          "Software Development",
+          "Problem Solving"
+        ],
+        "summary": "The candidate possesses a solid academic background in computer science with hands-on experience in programming and data-driven technologies. They demonstrate strong analytical capabilities and a commitment to continuous learning, making them a promising entry-level technical professional.",
+        "projects": [
+          "Project related to data analysis or software development",
+          "Academic technical projects"
+        ],
+        "education": "Bachelor of Technology in Computer Science and Engineering",
+        "experienceYears": 2
+      },
+      "phone": "7386878879",
+      "location": "Hyderabad",
+      "headline": "",
+      "summary": "",
+      "primarySkill": "Software Engineering",
+      "resumeUploaded": true,
+      "educationDetails": {},
+      "createdAt": "2026-09-26T15:34:07.443Z",
+      "updatedAt": "2026-09-26T15:34:29.137Z"
+    },
+    {
+      "id": "437c39e0-0452-4282-bc69-cd664d6e389f",
+      "userId": "437c39e0-0452-4282-bc69-cd664d6e389f",
+      "skills": [
+        "Software Engineering",
+        "Problem Solving"
+      ],
+      "phone": "",
+      "location": "",
+      "experienceYears": 0,
+      "headline": "",
+      "summary": "",
+      "bio": "",
+      "primarySkill": "Software Engineering",
+      "projects": [],
+      "resumeUploaded": false,
+      "educationDetails": {},
+      "extractedProfile": {},
+      "createdAt": "2026-09-26T15:34:09.856Z",
+      "updatedAt": "2026-09-26T15:34:29.576Z"
+    },
+    {
+      "id": "b33d8f5a-befe-4b4f-9d8a-92347b293cba",
+      "userId": "b33d8f5a-befe-4b4f-9d8a-92347b293cba",
+      "phone": "",
+      "location": "",
+      "experienceYears": 0,
+      "headline": "",
+      "summary": "",
+      "bio": "",
+      "primarySkill": "Software Engineering",
+      "skills": [],
+      "projects": [],
+      "resumeUploaded": false,
+      "educationDetails": {},
+      "extractedProfile": {},
+      "createdAt": "2026-09-26T15:34:05.466Z",
+      "updatedAt": "2026-09-26T15:34:05.466Z"
+    },
+    {
+      "id": "30000000-0000-0000-0000-000000000002",
+      "userId": "30000000-0000-0000-0000-000000000002",
+      "phone": "",
+      "location": "",
+      "experienceYears": 0,
+      "headline": "",
+      "summary": "",
+      "bio": "",
+      "primarySkill": "Software Engineering",
+      "skills": [],
+      "projects": [],
+      "resumeUploaded": false,
+      "educationDetails": {},
+      "extractedProfile": {},
+      "createdAt": "2026-09-26T15:34:06.128Z",
+      "updatedAt": "2026-09-26T15:34:06.128Z"
+    },
+    {
+      "id": "30000000-0000-0000-0000-000000000003",
+      "userId": "30000000-0000-0000-0000-000000000003",
+      "phone": "",
+      "location": "",
+      "experienceYears": 0,
+      "headline": "",
+      "summary": "",
+      "bio": "",
+      "primarySkill": "Software Engineering",
+      "skills": [],
+      "projects": [],
+      "resumeUploaded": false,
+      "educationDetails": {},
+      "extractedProfile": {},
+      "createdAt": "2026-09-26T15:34:06.566Z",
+      "updatedAt": "2026-09-26T15:34:06.566Z"
+    },
+    {
+      "id": "710fcb54-09b2-471b-94fc-30bc444e02c9",
+      "userId": "710fcb54-09b2-471b-94fc-30bc444e02c9",
+      "phone": "",
+      "location": "",
+      "experienceYears": 0,
+      "headline": "",
+      "summary": "",
+      "bio": "",
+      "primarySkill": "Software Engineering",
+      "skills": [],
+      "projects": [],
+      "resumeUploaded": false,
+      "educationDetails": {},
+      "extractedProfile": {},
+      "createdAt": "2026-09-26T15:34:08.101Z",
+      "updatedAt": "2026-09-26T15:34:08.101Z"
+    },
+    {
+      "id": "d9ef8689-a81c-472c-bea1-a0ee83841559",
+      "userId": "d9ef8689-a81c-472c-bea1-a0ee83841559",
+      "phone": "",
+      "location": "",
+      "experienceYears": 0,
+      "headline": "",
+      "summary": "",
+      "bio": "",
+      "primarySkill": "Software Engineering",
+      "skills": [],
+      "projects": [],
+      "resumeUploaded": false,
+      "educationDetails": {},
+      "extractedProfile": {},
+      "createdAt": "2026-09-26T15:34:08.540Z",
+      "updatedAt": "2026-09-26T15:34:08.540Z"
+    },
+    {
+      "id": "c53ce818-ee91-452f-8fcb-00728be017df",
+      "userId": "c53ce818-ee91-452f-8fcb-00728be017df",
+      "phone": "",
+      "location": "",
+      "experienceYears": 0,
+      "headline": "",
+      "summary": "",
+      "bio": "",
+      "primarySkill": "Software Engineering",
+      "skills": [],
+      "projects": [],
+      "resumeUploaded": false,
+      "educationDetails": {},
+      "extractedProfile": {},
+      "createdAt": "2026-09-26T15:34:08.979Z",
+      "updatedAt": "2026-09-26T15:34:08.979Z"
+    },
+    {
+      "id": "7d4148fe-5a0a-4789-acbc-65a14295f737",
+      "userId": "7d4148fe-5a0a-4789-acbc-65a14295f737",
+      "phone": "",
+      "location": "",
+      "experienceYears": 0,
+      "headline": "",
+      "summary": "",
+      "bio": "",
+      "primarySkill": "Software Engineering",
+      "skills": [],
+      "projects": [],
+      "resumeUploaded": false,
+      "educationDetails": {},
+      "extractedProfile": {},
+      "createdAt": "2026-09-26T15:34:10.294Z",
+      "updatedAt": "2026-09-26T15:34:10.294Z"
+    },
+    {
+      "id": "eb7edea4-d873-4f0c-a3b7-c27d19110e2a",
+      "userId": "eb7edea4-d873-4f0c-a3b7-c27d19110e2a",
+      "phone": "",
+      "location": "",
+      "experienceYears": 0,
+      "headline": "",
+      "summary": "",
+      "bio": "",
+      "primarySkill": "Software Engineering",
+      "skills": [],
+      "projects": [],
+      "resumeUploaded": false,
+      "educationDetails": {},
+      "extractedProfile": {},
+      "createdAt": "2026-09-26T15:34:11.176Z",
+      "updatedAt": "2026-09-26T15:34:11.176Z"
+    }
+  ],
+  "recruiters": [
+    {
+      "id": "6c6cb6e6-3e89-4782-b668-7ab1195f5816",
+      "userId": "57d52e9f-5d92-4097-879a-0f7542eb5bb4",
+      "companyId": "d62e90bd-d3e4-4b91-be53-5d3d35d9bad0",
+      "designation": "Talent Acquisition Lead"
+    },
+    {
+      "id": "4868fcb7-d473-46f8-b384-e1edc238010e",
+      "userId": "636626e1-e54e-48e3-9329-3b8d555a929f",
+      "companyId": "50bbba4b-4e50-4c08-9681-c80f4f7701cb",
+      "designation": "Talent Acquisition Lead"
+    }
+  ],
+  "companies": [
+    {
+      "id": "comp_zi4smiyay",
+      "name": "Cyberdyne Systems",
+      "industry": "Technology & Enterprise Software",
+      "description": "Cyberdyne Systems talent acquisition portal",
+      "location": "Global / Remote"
+    },
+    {
+      "id": "20000000-0000-0000-0000-000000000001",
+      "name": "TechNova Systems",
+      "description": "TechNova Systems engineers high-throughput distributed platforms and AI-driven enterprise infrastructure.",
+      "industry": "Enterprise Cloud & AI Software",
+      "location": "Chennai, India"
+    },
+    {
+      "id": "bb3f69fb-8891-47dd-8db8-2e15a113612c",
+      "name": "Google",
+      "industry": "Technology & Enterprise Software",
+      "description": "Google talent acquisition portal",
+      "location": "Global / Remote"
+    },
+    {
+      "id": "d62e90bd-d3e4-4b91-be53-5d3d35d9bad0",
+      "name": "Bhanu Batraju's Organization",
+      "industry": "Technology & Enterprise",
+      "description": "Bhanu Batraju's Organization enterprise division",
+      "location": "Remote / Global"
+    },
+    {
+      "id": "95d7fa17-2e16-4d0a-a855-58f9105654bf",
+      "name": "aws",
+      "industry": "Technology & Engineering",
+      "description": "aws engineering department",
+      "location": "Bengaluru / Hybrid"
+    },
+    {
+      "id": "50bbba4b-4e50-4c08-9681-c80f4f7701cb",
+      "name": "Ammu's Organization",
+      "industry": "Technology & Enterprise",
+      "description": "Ammu's Organization enterprise division",
+      "location": "Remote / Global"
+    },
+    {
+      "id": "9e400bd0-eac4-498b-a1ae-2cf599f9cf0e",
+      "name": "JOb 1",
+      "industry": "Technology & Engineering",
+      "description": "JOb 1 engineering department",
+      "location": "Bengaluru / Hybrid"
+    },
+    {
+      "id": "f3bc4067-d994-4d34-90bf-d524706b68a6",
+      "name": "vande mataram",
+      "description": "vande mataram engineering department",
+      "industry": "Technology & Engineering",
+      "location": "Remote"
+    },
+    {
+      "id": "b5142b0b-8b72-4832-97ee-255db20b34c5",
+      "name": "9876545678",
+      "industry": "Technology & Engineering",
+      "description": "9876545678 engineering department",
+      "location": "Bengaluru / Hybrid"
+    },
+    {
+      "id": "6dbe61cd-ab49-4883-93aa-f5704e6fa0b3",
+      "name": "TechNova Global",
+      "industry": "Technology & Enterprise Software",
+      "description": "TechNova Global talent acquisition portal",
+      "location": "Global / Remote"
+    },
+    {
+      "id": "81ec11db-fe6e-412c-ad85-78b19728961c",
+      "name": "TechNova Global",
+      "industry": "Technology & Enterprise Software",
+      "description": "TechNova Global talent acquisition portal",
+      "location": "Global / Remote"
+    },
+    {
+      "id": "6898d832-1f50-444c-8a5c-2e8b306979d0",
+      "name": "CTS",
+      "description": "CTS engineering department",
+      "industry": "Technology & Engineering",
+      "location": "Remote"
+    },
+    {
+      "id": "fc949590-bc57-4d42-936f-6f7d21ed945e",
+      "name": "Partner Company",
+      "description": "Company profile",
+      "industry": "Technology",
+      "location": "Remote"
+    },
+    {
+      "id": "3eba6de7-8604-42c1-bae7-601a2fb3b1fa",
+      "name": "TCS",
+      "description": "TCS engineering department",
+      "industry": "Technology & Engineering",
+      "location": "Remote"
+    },
+    {
+      "id": "164a3447-cb01-4425-abab-6a85455d34a8",
+      "name": "New Company",
+      "industry": "Technology & Engineering",
+      "description": "New Company engineering department",
+      "location": "Chennai"
+    },
+    {
+      "id": "2b2c5dbc-4a22-4dbf-a74e-b715f1ec6e91",
+      "name": "test",
+      "industry": "Technology & Engineering",
+      "description": "test engineering department",
+      "location": "Delhi"
+    },
+    {
+      "id": "abc33fae-b942-4ea3-9c23-6470314f5aaf",
+      "name": "Netlify",
+      "description": "Netlify engineering department",
+      "industry": "Technology & Engineering",
+      "location": "Remote"
+    },
+    {
+      "id": "37b6d994-2679-4c64-9685-3ad3189bbc7d",
+      "name": "One last",
+      "description": "One last engineering department",
+      "industry": "Technology & Engineering",
+      "location": "Mysore"
+    },
+    {
+      "id": "c5cc6075-2a75-4f5b-854d-da1918f1145d",
+      "name": "15:02",
+      "description": "15:02 engineering department",
+      "industry": "Technology & Engineering",
+      "location": "Remote"
+    },
+    {
+      "id": "8b330da8-7d31-47f3-95fb-3e83713b9a2e",
+      "name": "ai",
+      "description": "ai engineering department",
+      "industry": "Technology & Engineering",
+      "location": "Pune"
+    },
+    {
+      "id": "9a2be6a0-65d7-4993-a314-72ceae5e66a8",
+      "name": "Srkr engineering college",
+      "description": "Srkr engineering college engineering department",
+      "industry": "Technology & Engineering",
+      "location": "Remote"
+    },
+    {
+      "id": "a9f188ef-571a-4524-98ca-f0fde3661e06",
+      "name": "New Tab",
+      "description": "New Tab engineering department",
+      "industry": "Technology & Engineering",
+      "location": "Remote"
+    },
+    {
+      "id": "c4322689-3351-4578-8ae5-6a5d554bfb8b",
+      "name": "13/08/26",
+      "description": "13/08/26 engineering department",
+      "industry": "Technology & Engineering",
+      "location": "Delhi"
+    },
+    {
+      "id": "b1ee410e-ba2d-40a2-9796-71814a5025a1",
+      "name": "11:06",
+      "description": "11:06 engineering department",
+      "industry": "Technology & Engineering",
+      "location": "Bangalore"
+    },
+    {
+      "id": "ca5ceaec-5c50-4501-b8ba-fc067ffcf9dc",
+      "name": "15:08",
+      "description": "15:08 engineering department",
+      "industry": "Technology & Engineering",
+      "location": "Remote"
+    },
+    {
+      "id": "753e86fe-87f6-4c9f-8d08-21b2e02c16bb",
+      "name": "14/10",
+      "description": "14/10 engineering department",
+      "industry": "Technology & Engineering",
+      "location": "Bangalore"
+    }
+  ],
+  "jobs": [],
+  "interviewRegistrations": [],
+  "otpRecords": [
+    {
+      "id": "otp_y0p3rnd4v",
+      "email": "alex@example.com",
+      "otp": "646549",
+      "expiresAt": 1788975304694,
+      "attempts": 1,
+      "verified": true,
+      "createdAt": "2026-09-09T17:25:04.694Z"
+    },
+    {
+      "id": "otp_ahdaqofa5",
+      "email": "ffdhanush806@gmail.com",
+      "otp": "425811",
+      "expiresAt": 1789027034211,
+      "attempts": 1,
+      "verified": true,
+      "createdAt": "2026-09-10T07:47:14.211Z"
+    },
+    {
+      "id": "otp_vg0b03p0a",
+      "email": "nonexistent_test_12345@gmail.com",
+      "otp": "515306",
+      "expiresAt": 1789838749772,
+      "attempts": 0,
+      "verified": false,
+      "purpose": "VERIFY_EMAIL",
+      "createdAt": "2026-09-19T17:15:49.772Z"
+    }
+  ],
+  "interviews": [],
+  "interviewQuestions": [],
+  "interviewTranscripts": [],
+  "candidateCompetencies": [],
+  "coveredConcepts": [],
+  "proctoringEvents": [],
+  "malpracticeEvents": [],
+  "aiAssistanceSignals": [],
+  "candidateReports": [],
+  "recruiterReports": [],
+  "emailLogs": [],
+  "sessions": [
+    {
+      "token": "sess_8t4g54n7azmtudbh4odjsmpanfki",
+      "userId": "usr_rec_88qb7ffff",
+      "email": "sarah@cyberdyne.io",
+      "role": "RECRUITER",
+      "createdAt": "2026-09-09T17:24:13.560Z",
+      "expiresAt": 1791566653560
+    },
+    {
+      "token": "sess_oqwmbnhw6jmtudcqaqk0c94liqtc",
+      "userId": "usr_f20ed07bg",
+      "email": "alex@example.com",
+      "role": "CANDIDATE",
+      "createdAt": "2026-09-09T17:25:12.098Z",
+      "expiresAt": 1791566712098
+    },
+    {
+      "token": "sess_gq76zugmv8mtvaa2bde6jrkgxvps",
+      "userId": "3f8cda29-fcb6-47a4-bf0e-faa60da0ac11",
+      "email": "23102042@rmd.ac.in",
+      "role": "RECRUITER",
+      "createdAt": "2026-09-10T08:46:55.033Z",
+      "expiresAt": 1791622015033
+    },
+    {
+      "token": "sess_8k17oiip03mudycdqyfvtix4n8p9",
+      "userId": "d7581a15-5678-46df-8ba1-14e9dd2450b7",
+      "email": "ffdhanush806@gmail.com",
+      "role": "CANDIDATE",
+      "createdAt": "2026-09-23T10:20:25.114Z",
+      "expiresAt": 1792750825114
+    },
+    {
+      "token": "sess_af0kzgcmzemufjwfndamb5k4nafp",
+      "userId": "3f8cda29-fcb6-47a4-bf0e-faa60da0ac11",
+      "email": "23102042@rmd.ac.in",
+      "role": "RECRUITER",
+      "createdAt": "2026-09-24T13:11:38.809Z",
+      "expiresAt": 1792847498809
+    },
+    {
+      "token": "sess_d1o6aax8qvmufka5multh7spguoq",
+      "userId": "8be6bce4-4132-4101-9821-ff9531ccfdf9",
+      "email": "test_lead_1790256138812@technova.com",
+      "role": "RECRUITER",
+      "createdAt": "2026-09-24T13:22:19.014Z",
+      "expiresAt": 1792848139014
+    },
+    {
+      "token": "sess_pa233dwd7jmufkad8x0s8ttazd4a",
+      "userId": "2dfa5309-bac0-44c6-8b4e-c4ee7c8ade2e",
+      "email": "test_lead_1790256148697@technova.com",
+      "role": "RECRUITER",
+      "createdAt": "2026-09-24T13:22:28.881Z",
+      "expiresAt": 1792848148881
+    },
+    {
+      "token": "sess_cxg0h17j6nmuh4kndqoifh6es666",
+      "userId": "d7581a15-5678-46df-8ba1-14e9dd2450b7",
+      "email": "ffdhanush806@gmail.com",
+      "role": "CANDIDATE",
+      "createdAt": "2026-09-25T15:38:07.070Z",
+      "expiresAt": 1792942687071
+    },
+    {
+      "token": "sess_kqxo3hq0wzmumwqztah5zc4phl4w",
+      "userId": "3f8cda29-fcb6-47a4-bf0e-faa60da0ac11",
+      "email": "23102042@rmd.ac.in",
+      "role": "RECRUITER",
+      "createdAt": "2026-09-29T16:45:43.246Z",
+      "expiresAt": 1793292343246
+    },
+    {
+      "token": "sess_rrg6uarf77muu2bjun1v8s9oi349",
+      "userId": "d7581a15-5678-46df-8ba1-14e9dd2450b7",
+      "email": "ffdhanush806@gmail.com",
+      "role": "CANDIDATE",
+      "createdAt": "2026-10-04T16:56:03.647Z",
+      "expiresAt": 1793724963647
+    },
+    {
+      "token": "sess_1d6ta3wlhlmuv7r3imon0hkrhl1c",
+      "userId": "d7581a15-5678-46df-8ba1-14e9dd2450b7",
+      "email": "ffdhanush806@gmail.com",
+      "role": "CANDIDATE",
+      "createdAt": "2026-10-05T12:15:53.230Z",
+      "expiresAt": 1793794553230
+    },
+    {
+      "token": "sess_6vor951u5zmvc9fxlzl452begidp",
+      "userId": "d7581a15-5678-46df-8ba1-14e9dd2450b7",
+      "email": "ffdhanush806@gmail.com",
+      "role": "CANDIDATE",
+      "createdAt": "2026-10-17T10:35:16.584Z",
+      "expiresAt": 1794825316584
+    }
+  ],
+  "assessments": [],
+  "assessmentSubmissions": [],
+  "hrInterviews": [],
+  "offers": [],
+  "recruiterNotifications": [],
+  "recruiterActivities": [],
+  "integrityViolations": []
+}

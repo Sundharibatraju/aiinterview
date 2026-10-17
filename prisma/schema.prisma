@@ -1,0 +1,918 @@
+// =====================================================================
+// PRISMA SCHEMA: AI INTERVIEWER – AUTONOMOUS RECRUITMENT & ASSESSMENT
+// Database: PostgreSQL
+// =====================================================================
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ---------------------------------------------------------------------
+// ENUMS
+// ---------------------------------------------------------------------
+
+enum UserRole {
+  CANDIDATE
+  RECRUITER
+  ADMIN
+}
+
+enum AccountStatus {
+  PENDING_VERIFICATION
+  ACTIVE
+  LOCKED
+  SUSPENDED
+  DEACTIVATED
+}
+
+enum AuthProvider {
+  LOCAL
+  GOOGLE
+}
+
+enum JobStatus {
+  DRAFT
+  ACTIVE
+  CLOSED
+  EXPIRED
+  ARCHIVED
+}
+
+enum ApplicationStatus {
+  REGISTERED
+  APPLIED
+  INTERVIEW_READY
+  INTERVIEW_COMPLETED
+  SHORTLISTED
+  REJECTED
+  WITHDRAWN
+  HOLD
+  EXPIRED
+}
+
+enum InterviewStatus {
+  NOT_STARTED
+  READY
+  IN_PROGRESS
+  COMPLETED
+  TERMINATED
+  MALPRACTICE_TERMINATED
+  EXPIRED
+  CANCELLED
+}
+
+enum DifficultyLevel {
+  EASY
+  MEDIUM
+  HARD
+  ADVANCED
+}
+
+enum QuestionType {
+  SELF_INTRODUCTION
+  CONCEPTUAL
+  SCENARIO
+  DEBUGGING
+  CODING
+  COMPARISON
+  PROJECT_BASED
+  FAILURE_ANALYSIS
+  DESIGN
+  OPTMIZATION
+  FOLLOW_UP
+  CLARIFICATION
+  VERIFICATION
+}
+
+enum CandidateIntent {
+  ANSWER
+  THINKING_TIME_REQUEST
+  HINT_REQUEST
+  REPEAT_REQUEST
+  CLARIFICATION_REQUEST
+  SKIP_REQUEST
+  GIVE_UP
+  READY_TO_CONTINUE
+  CANDIDATE_QUESTION
+  ANSWER_CORRECTION
+}
+
+enum CompetencyLevel {
+  VERY_WEAK
+  WEAK
+  DEVELOPING
+  GOOD
+  STRONG
+  VERY_STRONG
+}
+
+enum RiskLevel {
+  LOW
+  MODERATE
+  HIGH
+  CRITICAL
+}
+
+enum ProctoringEventType {
+  TAB_SWITCH
+  WINDOW_BLUR
+  FULLSCREEN_EXIT
+  CAMERA_DISABLED
+  MICROPHONE_DISABLED
+  FACE_NOT_VISIBLE
+  MULTIPLE_PERSON_PRESENCE
+  COPY_EVENT
+  PASTE_EVENT
+  NETWORK_INTERRUPTION
+  PAGE_RELOAD
+  SESSION_TAMPERING
+  UNKNOWN_INTEGRITY_EVENT
+}
+
+enum MalpracticeAction {
+  WARNING
+  TERMINATED
+  REVIEW_REQUIRED
+}
+
+enum EmailType {
+  EMAIL_VERIFICATION
+  WELCOME
+  INTERVIEW_REGISTRATION
+  INTERVIEW_REMINDER
+  INTERVIEW_COMPLETED
+  CANDIDATE_REPORT
+  PASSWORD_RESET
+  MALPRACTICE_NOTICE
+  RECRUITER_NOTIFICATION
+}
+
+enum EmailStatus {
+  PENDING
+  SENT
+  FAILED
+  BOUNCED
+}
+
+enum RecruiterDecision {
+  NOT_REVIEWED
+  SHORTLIST
+  REJECT
+  HOLD
+  MANUAL_REVIEW
+}
+
+// ---------------------------------------------------------------------
+// MODELS
+// ---------------------------------------------------------------------
+
+model User {
+  id                   String               @id @default(uuid()) @db.Uuid
+  fullName             String               @map("full_name") @db.VarChar(150)
+  email                String               @unique @db.VarChar(255)
+  passwordHash         String?              @map("password_hash") @db.Text
+  role                 UserRole
+  accountStatus        AccountStatus        @default(PENDING_VERIFICATION) @map("account_status")
+  emailVerified        Boolean              @default(false) @map("email_verified")
+  authProvider         AuthProvider         @default(LOCAL) @map("auth_provider")
+  googleSubjectId      String?              @unique @map("google_subject_id") @db.VarChar(255)
+  profileImageUrl      String?              @map("profile_image_url") @db.Text
+  lastLoginAt          DateTime?            @map("last_login_at") @db.Timestamptz
+  failedLoginAttempts  Int                  @default(0) @map("failed_login_attempts")
+  lockedUntil          DateTime?            @map("locked_until") @db.Timestamptz
+  createdAt            DateTime             @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt            DateTime             @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  candidateProfile     CandidateProfile?
+  recruiterProfile     RecruiterProfile?
+  emailVerifications   EmailVerification[]
+  passwordResetTokens  PasswordResetToken[]
+  sessions             UserSession[]
+  emailLogs            EmailLog[]
+  notifications        Notification[]
+  auditLogs            AuditLog[]
+
+  @@index([email])
+  @@index([role, accountStatus])
+  @@map("users")
+}
+
+model UserSession {
+  id         String   @id @default(uuid()) @db.Uuid
+  userId     String   @map("user_id") @db.Uuid
+  token      String   @unique @db.Text
+  ipAddress  String?  @map("ip_address") @db.VarChar(45)
+  userAgent  String?  @map("user_agent") @db.Text
+  expiresAt  DateTime @map("expires_at") @db.Timestamptz
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([userId])
+  @@map("user_sessions")
+}
+
+model EmailVerification {
+  id           String    @id @default(uuid()) @db.Uuid
+  userId       String    @map("user_id") @db.Uuid
+  email        String    @db.VarChar(255)
+  otpHash      String    @map("otp_hash") @db.Text
+  expiresAt    DateTime  @map("expires_at") @db.Timestamptz
+  attemptCount Int       @default(0) @map("attempt_count")
+  maxAttempts  Int       @default(5) @map("max_attempts")
+  isUsed       Boolean   @default(false) @map("is_used")
+  verifiedAt   DateTime? @map("verified_at") @db.Timestamptz
+  createdAt    DateTime  @default(now()) @map("created_at") @db.Timestamptz
+
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt(sort: Desc)])
+  @@map("email_verifications")
+}
+
+model PasswordResetToken {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @map("user_id") @db.Uuid
+  tokenHash String    @unique @map("token_hash") @db.Text
+  expiresAt DateTime  @map("expires_at") @db.Timestamptz
+  usedAt    DateTime? @map("used_at") @db.Timestamptz
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("password_reset_tokens")
+}
+
+model CandidateProfile {
+  id               String                 @id @default(uuid()) @db.Uuid
+  userId           String                 @unique @map("user_id") @db.Uuid
+  phone            String?                @db.VarChar(20)
+  dateOfBirth      DateTime?              @map("date_of_birth") @db.Date
+  collegeName      String?                @map("college_name") @db.VarChar(255)
+  degree           String?                @db.VarChar(150)
+  department       String?                @db.VarChar(150)
+  graduationYear   Int?                   @map("graduation_year")
+  currentLocation  String?                @map("current_location") @db.VarChar(255)
+  experienceYears  Decimal                @default(0) @map("experience_years") @db.Decimal(4, 2)
+  headline         String?                @db.VarChar(255)
+  summary          String?                @db.Text
+  linkedinUrl      String?                @map("linkedin_url") @db.Text
+  githubUrl        String?                @map("github_url") @db.Text
+  portfolioUrl     String?                @map("portfolio_url") @db.Text
+  primarySkill     String?                @map("primary_skill") @db.VarChar(100)
+  createdAt        DateTime               @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt        DateTime               @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  user             User                   @relation(fields: [userId], references: [id], onDelete: Restrict)
+  skills           CandidateSkill[]
+  resumes          Resume[]
+  applications     JobApplication[]
+  interviewRegs    InterviewRegistration[]
+  interviews       Interview[]
+  competencies     CandidateCompetency[]
+  proctoringEvents ProctoringEvent[]
+  malpracticeEvents MalpracticeEvent[]
+  reports          InterviewReport[]
+
+  @@map("candidate_profiles")
+}
+
+model Skill {
+  id               String                @id @default(uuid()) @db.Uuid
+  name             String                @unique @db.VarChar(120)
+  normalizedName   String                @unique @map("normalized_name") @db.VarChar(120)
+  createdAt        DateTime              @default(now()) @map("created_at") @db.Timestamptz
+
+  candidateSkills  CandidateSkill[]
+  jobSkills        JobSkill[]
+  questions        InterviewQuestion[]
+  coveredConcepts  CoveredConcept[]
+  competencies     CandidateCompetency[]
+
+  @@map("skills")
+}
+
+model CandidateSkill {
+  id                 String           @id @default(uuid()) @db.Uuid
+  candidateId        String           @map("candidate_id") @db.Uuid
+  skillId            String           @map("skill_id") @db.Uuid
+  selfReportedLevel  String?          @map("self_reported_level") @db.VarChar(50)
+  yearsExperience    Decimal?         @map("years_experience") @db.Decimal(4, 2)
+  source             String           @default("SELF_DECLARED") @db.VarChar(30)
+  createdAt          DateTime         @default(now()) @map("created_at") @db.Timestamptz
+
+  candidate          CandidateProfile @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  skill              Skill            @relation(fields: [skillId], references: [id], onDelete: Restrict)
+
+  @@unique([candidateId, skillId, source])
+  @@map("candidate_skills")
+}
+
+model Company {
+  id          String             @id @default(uuid()) @db.Uuid
+  name        String             @db.VarChar(255)
+  slug        String             @unique @db.VarChar(255)
+  description String?            @db.Text
+  websiteUrl  String?            @map("website_url") @db.Text
+  logoUrl     String?            @map("logo_url") @db.Text
+  industry    String?            @db.VarChar(150)
+  companySize String?            @map("company_size") @db.VarChar(100)
+  headquarters String?           @db.VarChar(255)
+  isVerified  Boolean            @default(false) @map("is_verified")
+  createdAt   DateTime           @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime           @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  recruiters  RecruiterProfile[]
+  jobs        Job[]
+
+  @@map("companies")
+}
+
+model RecruiterProfile {
+  id             String              @id @default(uuid()) @db.Uuid
+  userId         String              @unique @map("user_id") @db.Uuid
+  companyId      String              @map("company_id") @db.Uuid
+  designation    String?             @db.VarChar(150)
+  workEmail      String?             @map("work_email") @db.VarChar(255)
+  phone          String?             @db.VarChar(20)
+  isCompanyAdmin Boolean             @default(false) @map("is_company_admin")
+  createdAt      DateTime            @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt      DateTime            @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  user           User                @relation(fields: [userId], references: [id], onDelete: Restrict)
+  company        Company             @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  jobs           Job[]
+  decisions      RecruiterDecisionModel[]
+
+  @@index([companyId])
+  @@map("recruiter_profiles")
+}
+
+model Job {
+  id                       String                 @id @default(uuid()) @db.Uuid
+  companyId                String                 @map("company_id") @db.Uuid
+  recruiterId              String                 @map("recruiter_id") @db.Uuid
+  title                    String                 @db.VarChar(255)
+  jobCode                  String?                @unique @map("job_code") @db.VarChar(50)
+  description              String                 @db.Text
+  location                 String?                @db.VarChar(255)
+  workMode                 String                 @default("HYBRID") @map("work_mode") @db.VarChar(30)
+  employmentType           String                 @default("FULL_TIME") @map("employment_type") @db.VarChar(50)
+  qualification            String?                @db.VarChar(255)
+  minimumExperience        Decimal                @default(0) @map("minimum_experience") @db.Decimal(4, 2)
+  maximumExperience        Decimal?               @map("maximum_experience") @db.Decimal(4, 2)
+  currency                 String                 @default("INR") @db.VarChar(10)
+  minimumPackage           Decimal?               @map("minimum_package") @db.Decimal(12, 2)
+  maximumPackage           Decimal?               @map("maximum_package") @db.Decimal(12, 2)
+  packagePeriod            String                 @default("YEAR") @map("package_period") @db.VarChar(20)
+  applicationDeadline      DateTime?              @map("application_deadline") @db.Timestamptz
+  interviewOpenAt          DateTime?              @map("interview_open_at") @db.Timestamptz
+  interviewCloseAt         DateTime?              @map("interview_close_at") @db.Timestamptz
+  estimatedInterviewMinutes Int                   @default(30) @map("estimated_interview_minutes")
+  status                   JobStatus              @default(DRAFT)
+  publishedAt              DateTime?              @map("published_at") @db.Timestamptz
+  createdAt                DateTime               @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt                DateTime               @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  company                  Company                @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  recruiter                RecruiterProfile       @relation(fields: [recruiterId], references: [id], onDelete: Restrict)
+  skills                   JobSkill[]
+  applications             JobApplication[]
+  interviewRegistrations   InterviewRegistration[]
+  interviews               Interview[]
+  malpracticeEvents        MalpracticeEvent[]
+  reports                  InterviewReport[]
+  emailLogs                EmailLog[]
+
+  @@index([companyId, status])
+  @@index([recruiterId])
+  @@index([status, applicationDeadline])
+  @@index([title])
+  @@map("jobs")
+}
+
+model JobSkill {
+  id               String   @id @default(uuid()) @db.Uuid
+  jobId            String   @map("job_id") @db.Uuid
+  skillId          String   @map("skill_id") @db.Uuid
+  isRequired       Boolean  @default(true) @map("is_required")
+  importanceWeight Decimal  @default(1.00) @map("importance_weight") @db.Decimal(5, 2)
+  minimumLevel     String?  @map("minimum_level") @db.VarChar(50)
+  createdAt        DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  job              Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  skill            Skill    @relation(fields: [skillId], references: [id], onDelete: Restrict)
+
+  @@unique([jobId, skillId])
+  @@map("job_skills")
+}
+
+model Resume {
+  id               String           @id @default(uuid()) @db.Uuid
+  candidateId      String           @map("candidate_id") @db.Uuid
+  originalFilename String           @map("original_filename") @db.VarChar(255)
+  storagePath      String           @map("storage_path") @db.Text
+  mimeType         String           @map("mime_type") @db.VarChar(100)
+  fileSize         BigInt?          @map("file_size")
+  sha256Hash       String?          @map("sha256_hash") @db.VarChar(64)
+  parsedText       String?          @map("parsed_text") @db.Text
+  parsedJson       Json?            @map("parsed_json")
+  isCurrent        Boolean          @default(true) @map("is_current")
+  uploadedAt       DateTime         @default(now()) @map("uploaded_at") @db.Timestamptz
+
+  candidate        CandidateProfile @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  applications     JobApplication[]
+
+  @@index([candidateId])
+  @@map("resumes")
+}
+
+model JobApplication {
+  id                    String                 @id @default(uuid()) @db.Uuid
+  jobId                 String                 @map("job_id") @db.Uuid
+  candidateId           String                 @map("candidate_id") @db.Uuid
+  resumeId              String?                @map("resume_id") @db.Uuid
+  status                ApplicationStatus      @default(REGISTERED)
+  appliedAt             DateTime               @default(now()) @map("applied_at") @db.Timestamptz
+  updatedAt             DateTime               @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+  withdrawnAt           DateTime?              @map("withdrawn_at") @db.Timestamptz
+  recruiterNotes        String?                @map("recruiter_notes") @db.Text
+
+  job                   Job                    @relation(fields: [jobId], references: [id], onDelete: Restrict)
+  candidate             CandidateProfile       @relation(fields: [candidateId], references: [id], onDelete: Restrict)
+  resume                Resume?                @relation(fields: [resumeId], references: [id], onDelete: SetNull)
+  interviewRegistration InterviewRegistration?
+
+  @@unique([jobId, candidateId])
+  @@index([candidateId, status])
+  @@index([jobId, status])
+  @@map("job_applications")
+}
+
+model InterviewRegistration {
+  id                   String           @id @default(uuid()) @db.Uuid
+  applicationId        String           @unique @map("application_id") @db.Uuid
+  candidateId          String           @map("candidate_id") @db.Uuid
+  jobId                String           @map("job_id") @db.Uuid
+  interviewCodeHash    String           @map("interview_code_hash") @db.Text
+  interviewCodeLast4   String?          @map("interview_code_last4") @db.VarChar(8)
+  codeExpiresAt        DateTime?        @map("code_expires_at") @db.Timestamptz
+  codeVerifiedAt       DateTime?        @map("code_verified_at") @db.Timestamptz
+  codeAttemptCount     Int              @default(0) @map("code_attempt_count")
+  maxCodeAttempts      Int              @default(5) @map("max_code_attempts")
+  isCodeRevoked        Boolean          @default(false) @map("is_code_revoked")
+  registrationStatus   String           @default("ACTIVE") @map("registration_status") @db.VarChar(40)
+  registeredAt         DateTime         @default(now()) @map("registered_at") @db.Timestamptz
+  createdAt            DateTime         @default(now()) @map("created_at") @db.Timestamptz
+
+  application          JobApplication   @relation(fields: [applicationId], references: [id], onDelete: Restrict)
+  candidate            CandidateProfile @relation(fields: [candidateId], references: [id], onDelete: Restrict)
+  job                  Job              @relation(fields: [jobId], references: [id], onDelete: Restrict)
+  interview            Interview?
+
+  @@index([candidateId])
+  @@index([jobId])
+  @@map("interview_registrations")
+}
+
+model Interview {
+  id                   String                      @id @default(uuid()) @db.Uuid
+  registrationId       String                      @unique @map("registration_id") @db.Uuid
+  candidateId          String                      @map("candidate_id") @db.Uuid
+  jobId                String                      @map("job_id") @db.Uuid
+  status               InterviewStatus             @default(NOT_STARTED)
+  startedAt            DateTime?                   @map("started_at") @db.Timestamptz
+  completedAt          DateTime?                   @map("completed_at") @db.Timestamptz
+  terminatedAt         DateTime?                   @map("terminated_at") @db.Timestamptz
+  durationSeconds      Int?                        @map("duration_seconds")
+  currentDifficulty    DifficultyLevel             @default(MEDIUM) @map("current_difficulty")
+  currentTopic         String?                     @map("current_topic") @db.VarChar(150)
+  questionCount        Int                         @default(0) @map("question_count")
+  hintCount            Int                         @default(0) @map("hint_count")
+  skipCount            Int                         @default(0) @map("skip_count")
+  warningCount         Int                         @default(0) @map("warning_count")
+  malpracticeFlag      Boolean                     @default(false) @map("malpractice_flag")
+  aiAssistanceRisk     RiskLevel                   @default(LOW) @map("ai_assistance_risk")
+  completionReason     String?                     @map("completion_reason") @db.VarChar(255)
+  sessionMetadata      Json?                       @map("session_metadata")
+  createdAt            DateTime                    @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt            DateTime                    @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  registration         InterviewRegistration       @relation(fields: [registrationId], references: [id], onDelete: Restrict)
+  candidate            CandidateProfile            @relation(fields: [candidateId], references: [id], onDelete: Restrict)
+  job                  Job                         @relation(fields: [jobId], references: [id], onDelete: Restrict)
+  systemCheck          InterviewSystemCheck?
+  questions            InterviewQuestion[]
+  similarityChecks     QuestionSimilarityCheck[]
+  answers              InterviewAnswer[]
+  transcriptMessages   InterviewTranscriptMessage[]
+  hints                InterviewHint[]
+  coveredConcepts      CoveredConcept[]
+  competencies         CandidateCompetency[]
+  behaviorMetrics      CandidateBehaviorMetric[]
+  aiSignals            AiAssistanceSignal[]
+  proctoringEvents     ProctoringEvent[]
+  malpracticeEvents    MalpracticeEvent[]
+  sessionEvents        InterviewSessionEvent[]
+  report               InterviewReport?
+  recruiterDecision    RecruiterDecisionModel?
+  emailLogs            EmailLog[]
+
+  @@index([candidateId, status])
+  @@index([jobId, status])
+  @@index([startedAt])
+  @@map("interviews")
+}
+
+model InterviewSystemCheck {
+  id                        String    @id @default(uuid()) @db.Uuid
+  interviewId               String    @unique @map("interview_id") @db.Uuid
+  microphonePermission      Boolean   @default(false) @map("microphone_permission")
+  microphoneTestPassed      Boolean   @default(false) @map("microphone_test_passed")
+  microphoneMatchScore      Decimal?  @map("microphone_match_score") @db.Decimal(5, 2)
+  microphoneTestSentence    String?   @map("microphone_test_sentence") @db.VarChar(200)
+  cameraPermission          Boolean   @default(false) @map("camera_permission")
+  cameraStreamActive        Boolean   @default(false) @map("camera_stream_active")
+  candidatePresenceDetected Boolean?  @map("candidate_presence_detected")
+  speakerTestPassed         Boolean   @default(false) @map("speaker_test_passed")
+  fullscreenReady           Boolean   @default(false) @map("fullscreen_ready")
+  networkCheckPassed        Boolean   @default(false) @map("network_check_passed")
+  browserSupported          Boolean   @default(true) @map("browser_supported")
+  rulesAccepted             Boolean   @default(false) @map("rules_accepted")
+  rulesAcceptedAt           DateTime? @map("rules_accepted_at") @db.Timestamptz
+  allChecksPassed           Boolean   @default(false) @map("all_checks_passed")
+  checkedAt                 DateTime? @map("checked_at") @db.Timestamptz
+  createdAt                 DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt                 DateTime  @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  interview                 Interview @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+
+  @@map("interview_system_checks")
+}
+
+model InterviewQuestion {
+  id                   String                      @id @default(uuid()) @db.Uuid
+  interviewId          String                      @map("interview_id") @db.Uuid
+  sequenceNumber       Int                         @map("sequence_number")
+  questionText         String                      @map("question_text") @db.Text
+  normalizedQuestion   String?                     @map("normalized_question") @db.Text
+  questionType         QuestionType                @map("question_type")
+  skillId              String?                     @map("skill_id") @db.Uuid
+  topic                String?                     @db.VarChar(150)
+  subtopic             String?                     @db.VarChar(150)
+  difficulty           DifficultyLevel
+  parentQuestionId     String?                     @map("parent_question_id") @db.Uuid
+  isFollowUp           Boolean                     @default(false) @map("is_follow_up")
+  generationSource     String                      @default("GEMINI") @map("generation_source") @db.VarChar(50)
+  referenceAnswer      String?                     @map("reference_answer") @db.Text
+  expectedConcepts     Json?                       @map("expected_concepts")
+  semanticFingerprint  String?                     @map("semantic_fingerprint") @db.Text
+  askedAt              DateTime                    @default(now()) @map("asked_at") @db.Timestamptz
+  createdAt            DateTime                    @default(now()) @map("created_at") @db.Timestamptz
+
+  interview            Interview                   @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+  skill                Skill?                      @relation(fields: [skillId], references: [id], onDelete: SetNull)
+  parentQuestion       InterviewQuestion?          @relation("QuestionFollowUps", fields: [parentQuestionId], references: [id], onDelete: SetNull)
+  followUps            InterviewQuestion[]         @relation("QuestionFollowUps")
+  answer               InterviewAnswer?
+  hints                InterviewHint[]
+  transcriptMessages   InterviewTranscriptMessage[]
+  behaviorMetrics      CandidateBehaviorMetric[]
+  aiSignals            AiAssistanceSignal[]
+  similarityMatches    QuestionSimilarityCheck[]
+
+  @@unique([interviewId, sequenceNumber])
+  @@index([interviewId, topic, difficulty])
+  @@map("interview_questions")
+}
+
+model QuestionSimilarityCheck {
+  id                 String             @id @default(uuid()) @db.Uuid
+  interviewId        String             @map("interview_id") @db.Uuid
+  candidateQuestion  String             @map("candidate_question") @db.Text
+  existingQuestionId String?            @map("existing_question_id") @db.Uuid
+  similarityScore    Decimal?           @map("similarity_score") @db.Decimal(5, 4)
+  decision           String             @db.VarChar(30)
+  createdAt          DateTime           @default(now()) @map("created_at") @db.Timestamptz
+
+  interview          Interview          @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+  existingQuestion   InterviewQuestion? @relation(fields: [existingQuestionId], references: [id], onDelete: SetNull)
+
+  @@map("question_similarity_checks")
+}
+
+model InterviewAnswer {
+  id                         String            @id @default(uuid()) @db.Uuid
+  interviewId                String            @map("interview_id") @db.Uuid
+  questionId                 String            @unique @map("question_id") @db.Uuid
+  candidateAnswerText        String?           @map("candidate_answer_text") @db.Text
+  speechTranscript           String?           @map("speech_transcript") @db.Text
+  intent                     CandidateIntent   @default(ANSWER)
+  technicalCorrectness       Decimal?          @map("technical_correctness") @db.Decimal(5, 2)
+  conceptCoverage            Decimal?          @map("concept_coverage") @db.Decimal(5, 2)
+  relevanceScore             Decimal?          @map("relevance_score") @db.Decimal(5, 2)
+  reasoningScore             Decimal?          @map("reasoning_score") @db.Decimal(5, 2)
+  completenessScore          Decimal?          @map("completeness_score") @db.Decimal(5, 2)
+  communicationScore         Decimal?          @map("communication_score") @db.Decimal(5, 2)
+  independentReasoningScore  Decimal?          @map("independent_reasoning_score") @db.Decimal(5, 2)
+  answerState                String?           @map("answer_state") @db.VarChar(50)
+  aiFeedback                 String?           @map("ai_feedback") @db.Text
+  internalEvaluation         Json?             @map("internal_evaluation")
+  responseTimeMs             Int?              @map("response_time_ms")
+  hintsUsed                  Int               @default(0) @map("hints_used")
+  wasSkipped                 Boolean           @default(false) @map("was_skipped")
+  candidateCorrectedAnswer   Boolean           @default(false) @map("candidate_corrected_answer")
+  answeredAt                 DateTime?         @map("answered_at") @db.Timestamptz
+  createdAt                  DateTime          @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt                  DateTime          @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  interview                  Interview         @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+  question                   InterviewQuestion @relation(fields: [questionId], references: [id], onDelete: Restrict)
+
+  @@index([interviewId])
+  @@map("interview_answers")
+}
+
+model InterviewTranscriptMessage {
+  id               String             @id @default(uuid()) @db.Uuid
+  interviewId      String             @map("interview_id") @db.Uuid
+  sequenceNumber   BigInt             @map("sequence_number")
+  speaker          String             @db.VarChar(30)
+  messageType      String             @map("message_type") @db.VarChar(50)
+  textContent      String?            @map("text_content") @db.Text
+  audioStoragePath String?            @map("audio_storage_path") @db.Text
+  intent           CandidateIntent?
+  questionId       String?            @map("question_id") @db.Uuid
+  createdAt        DateTime           @default(now()) @map("created_at") @db.Timestamptz
+
+  interview        Interview          @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+  question         InterviewQuestion? @relation(fields: [questionId], references: [id], onDelete: SetNull)
+
+  @@unique([interviewId, sequenceNumber])
+  @@index([interviewId])
+  @@map("interview_transcript_messages")
+}
+
+model InterviewHint {
+  id           String            @id @default(uuid()) @db.Uuid
+  interviewId  String            @map("interview_id") @db.Uuid
+  questionId   String            @map("question_id") @db.Uuid
+  hintLevel    Int               @map("hint_level")
+  hintText     String            @map("hint_text") @db.Text
+  requestedAt  DateTime          @default(now()) @map("requested_at") @db.Timestamptz
+
+  interview    Interview         @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+  question     InterviewQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@map("interview_hints")
+}
+
+model CoveredConcept {
+  id                   String           @id @default(uuid()) @db.Uuid
+  interviewId          String           @map("interview_id") @db.Uuid
+  skillId              String?          @map("skill_id") @db.Uuid
+  topic                String           @db.VarChar(150)
+  concept              String           @db.VarChar(200)
+  understanding        CompetencyLevel?
+  confidence           Decimal?         @db.Decimal(5, 2)
+  firstSeenQuestionId  String?          @map("first_seen_question_id") @db.Uuid
+  lastUpdatedAt        DateTime         @default(now()) @map("last_updated_at") @db.Timestamptz
+
+  interview            Interview        @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+  skill                Skill?           @relation(fields: [skillId], references: [id], onDelete: SetNull)
+
+  @@unique([interviewId, concept])
+  @@map("covered_concepts")
+}
+
+model CandidateCompetency {
+  id            String           @id @default(uuid()) @db.Uuid
+  interviewId   String           @map("interview_id") @db.Uuid
+  candidateId   String           @map("candidate_id") @db.Uuid
+  skillId       String?          @map("skill_id") @db.Uuid
+  topic         String           @db.VarChar(150)
+  subtopic      String           @default("General") @db.VarChar(150)
+  competency    CompetencyLevel
+  internalScore Decimal?         @map("internal_score") @db.Decimal(5, 2)
+  evidenceCount Int              @default(0) @map("evidence_count")
+  summary       String?          @db.Text
+  createdAt     DateTime         @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt     DateTime         @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  interview     Interview        @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+  candidate     CandidateProfile @relation(fields: [candidateId], references: [id], onDelete: Restrict)
+  skill         Skill?           @relation(fields: [skillId], references: [id], onDelete: SetNull)
+
+  @@unique([interviewId, topic, subtopic])
+  @@index([interviewId])
+  @@map("candidate_competencies")
+}
+
+model CandidateBehaviorMetric {
+  id                     String             @id @default(uuid()) @db.Uuid
+  interviewId            String             @map("interview_id") @db.Uuid
+  questionId             String?            @map("question_id") @db.Uuid
+  responseTimeMs         Int?               @map("response_time_ms")
+  wordCount              Int?               @map("word_count")
+  characterCount         Int?               @map("character_count")
+  pasteDetected          Boolean            @default(false) @map("paste_detected")
+  copyDetected           Boolean            @default(false) @map("copy_detected")
+  styleChangeScore       Decimal?           @map("style_change_score") @db.Decimal(5, 2)
+  vocabularyShiftScore   Decimal?           @map("vocabulary_shift_score") @db.Decimal(5, 2)
+  answerSimilarityScore  Decimal?           @map("answer_similarity_score") @db.Decimal(5, 2)
+  createdAt              DateTime           @default(now()) @map("created_at") @db.Timestamptz
+
+  interview              Interview          @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+  question               InterviewQuestion? @relation(fields: [questionId], references: [id], onDelete: SetNull)
+
+  @@map("candidate_behavior_metrics")
+}
+
+model AiAssistanceSignal {
+  id          String             @id @default(uuid()) @db.Uuid
+  interviewId String             @map("interview_id") @db.Uuid
+  questionId  String?            @map("question_id") @db.Uuid
+  signalType  String             @map("signal_type") @db.VarChar(100)
+  riskLevel   RiskLevel          @map("risk_level")
+  confidence  Decimal?           @db.Decimal(5, 2)
+  description String             @db.Text
+  evidence    Json?
+  createdAt   DateTime           @default(now()) @map("created_at") @db.Timestamptz
+
+  interview   Interview          @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+  question    InterviewQuestion? @relation(fields: [questionId], references: [id], onDelete: SetNull)
+
+  @@index([interviewId])
+  @@map("ai_assistance_signals")
+}
+
+model ProctoringEvent {
+  id                 String              @id @default(uuid()) @db.Uuid
+  interviewId        String              @map("interview_id") @db.Uuid
+  candidateId        String              @map("candidate_id") @db.Uuid
+  eventType          ProctoringEventType @map("event_type")
+  severity           RiskLevel
+  eventNumber        Int                 @map("event_number")
+  browserTimestamp   DateTime?           @map("browser_timestamp") @db.Timestamptz
+  serverTimestamp    DateTime            @default(now()) @map("server_timestamp") @db.Timestamptz
+  details            Json?
+  warningIssued      Boolean             @default(false) @map("warning_issued")
+  malpracticeRelated Boolean             @default(false) @map("malpractice_related")
+  createdAt          DateTime            @default(now()) @map("created_at") @db.Timestamptz
+
+  interview          Interview           @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+  candidate          CandidateProfile    @relation(fields: [candidateId], references: [id], onDelete: Restrict)
+  malpracticeEvents  MalpracticeEvent[]
+
+  @@index([interviewId, createdAt])
+  @@index([eventType])
+  @@map("proctoring_events")
+}
+
+model MalpracticeEvent {
+  id                          String             @id @default(uuid()) @db.Uuid
+  interviewId                 String             @map("interview_id") @db.Uuid
+  candidateId                 String             @map("candidate_id") @db.Uuid
+  jobId                       String             @map("job_id") @db.Uuid
+  triggeringProctoringEventId String?            @map("triggering_proctoring_event_id") @db.Uuid
+  violationNumber             Int                @map("violation_number")
+  violationType               String             @map("violation_type") @db.VarChar(100)
+  description                 String             @db.Text
+  action                      MalpracticeAction
+  warningMessage              String?            @map("warning_message") @db.Text
+  interviewTerminated         Boolean            @default(false) @map("interview_terminated")
+  createdAt                   DateTime           @default(now()) @map("created_at") @db.Timestamptz
+
+  interview                   Interview          @relation(fields: [interviewId], references: [id], onDelete: Restrict)
+  candidate                   CandidateProfile   @relation(fields: [candidateId], references: [id], onDelete: Restrict)
+  job                         Job                @relation(fields: [jobId], references: [id], onDelete: Restrict)
+  triggeringEvent             ProctoringEvent?   @relation(fields: [triggeringProctoringEventId], references: [id], onDelete: SetNull)
+
+  @@index([interviewId])
+  @@map("malpractice_events")
+}
+
+model InterviewSessionEvent {
+  id          String    @id @default(uuid()) @db.Uuid
+  interviewId String    @map("interview_id") @db.Uuid
+  eventType   String    @map("event_type") @db.VarChar(100)
+  eventData   Json?     @map("event_data")
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz
+
+  interview   Interview @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+
+  @@map("interview_session_events")
+}
+
+model InterviewReport {
+  id                          String           @id @default(uuid()) @db.Uuid
+  interviewId                 String           @unique @map("interview_id") @db.Uuid
+  candidateId                 String           @map("candidate_id") @db.Uuid
+  jobId                       String           @map("job_id") @db.Uuid
+  technicalSummary            String?          @map("technical_summary") @db.Text
+  overallSummary              String?          @map("overall_summary") @db.Text
+  strengths                   Json?
+  weaknesses                  Json?
+  learningRecommendations     Json?            @map("learning_recommendations")
+  competencySummary           Json?            @map("competency_summary")
+  problemSolvingSummary       String?          @map("problem_solving_summary") @db.Text
+  communicationSummary        String?          @map("communication_summary") @db.Text
+  independentReasoningSummary String?          @map("independent_reasoning_summary") @db.Text
+  difficultyProgression       Json?            @map("difficulty_progression")
+  hintDependency              String?          @map("hint_dependency") @db.VarChar(50)
+  followupPerformance         String?          @map("followup_performance") @db.VarChar(50)
+  aiAssistanceRisk            RiskLevel        @default(LOW) @map("ai_assistance_risk")
+  integrityStatus             String?          @map("integrity_status") @db.VarChar(50)
+  candidateReportPath         String?          @map("candidate_report_path") @db.Text
+  recruiterReportPath         String?          @map("recruiter_report_path") @db.Text
+  generatedAt                 DateTime         @default(now()) @map("generated_at") @db.Timestamptz
+  createdAt                   DateTime         @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt                   DateTime         @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  interview                   Interview        @relation(fields: [interviewId], references: [id], onDelete: Restrict)
+  candidate                   CandidateProfile @relation(fields: [candidateId], references: [id], onDelete: Restrict)
+  job                         Job              @relation(fields: [jobId], references: [id], onDelete: Restrict)
+
+  @@map("interview_reports")
+}
+
+model RecruiterDecisionModel {
+  id          String            @id @default(uuid()) @db.Uuid
+  interviewId String            @unique @map("interview_id") @db.Uuid
+  recruiterId String            @map("recruiter_id") @db.Uuid
+  decision    RecruiterDecision @default(NOT_REVIEWED)
+  notes       String?           @db.Text
+  decidedAt   DateTime?         @map("decided_at") @db.Timestamptz
+  createdAt   DateTime          @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime          @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  interview   Interview         @relation(fields: [interviewId], references: [id], onDelete: Restrict)
+  recruiter   RecruiterProfile  @relation(fields: [recruiterId], references: [id], onDelete: Restrict)
+
+  @@map("recruiter_decisions")
+}
+
+model EmailLog {
+  id                String      @id @default(uuid()) @db.Uuid
+  userId            String?     @map("user_id") @db.Uuid
+  interviewId       String?     @map("interview_id") @db.Uuid
+  jobId             String?     @map("job_id") @db.Uuid
+  recipientEmail    String      @map("recipient_email") @db.VarChar(255)
+  emailType         EmailType   @map("email_type")
+  subject           String      @db.VarChar(255)
+  providerMessageId String?     @map("provider_message_id") @db.VarChar(255)
+  status            EmailStatus @default(PENDING)
+  attemptCount      Int         @default(0) @map("attempt_count")
+  errorMessage      String?     @map("error_message") @db.Text
+  sentAt            DateTime?   @map("sent_at") @db.Timestamptz
+  createdAt         DateTime    @default(now()) @map("created_at") @db.Timestamptz
+
+  user              User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  interview         Interview?  @relation(fields: [interviewId], references: [id], onDelete: SetNull)
+  job               Job?        @relation(fields: [jobId], references: [id], onDelete: SetNull)
+
+  @@index([status, createdAt])
+  @@index([recipientEmail])
+  @@index([interviewId])
+  @@map("email_logs")
+}
+
+model Notification {
+  id               String    @id @default(uuid()) @db.Uuid
+  userId           String    @map("user_id") @db.Uuid
+  title            String    @db.VarChar(255)
+  message          String    @db.Text
+  notificationType String    @map("notification_type") @db.VarChar(80)
+  isRead           Boolean   @default(false) @map("is_read")
+  readAt           DateTime? @map("read_at") @db.Timestamptz
+  metadata         Json?
+  createdAt        DateTime  @default(now()) @map("created_at") @db.Timestamptz
+
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isRead])
+  @@map("notifications")
+}
+
+model AuditLog {
+  id          String   @id @default(uuid()) @db.Uuid
+  actorUserId String?  @map("actor_user_id") @db.Uuid
+  action      String   @db.VarChar(150)
+  entityType  String?  @map("entity_type") @db.VarChar(100)
+  entityId    String?  @map("entity_id") @db.Uuid
+  ipAddress   String?  @map("ip_address") @db.VarChar(45)
+  userAgent   String?  @map("user_agent") @db.Text
+  metadata    Json?
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  actorUser   User?    @relation(fields: [actorUserId], references: [id], onDelete: SetNull)
+
+  @@index([actorUserId, createdAt])
+  @@map("audit_logs")
+}

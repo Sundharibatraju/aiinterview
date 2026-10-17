@@ -1,0 +1,7 @@
+{
+  "name": "AI Interviewer – Autonomous Recruitment & Assessment Platform",
+  "description": "Autonomous recruitment platform conducting real-time voice AI technical interviews with adaptive difficulty, integrity proctoring, and comprehensive competency reporting.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
